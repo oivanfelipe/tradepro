@@ -13,6 +13,41 @@
 
 **Período:** 01/10 a 05/11 (Google, prints) e as campanhas Meta ativas desde 09/10. Fonte Meta: Windsor.
 
+### 0.0 Correções após o painel oficial da V4 e as respostas finais (leia primeiro)
+
+**Fonte:** painel https://tradeprodados.netlify.app/ (01 a 29/10, atualizado em 30/10), com leads, MQL, SQL e vendas vindos da planilha/CRM do cliente, o número oficial. Os prints do Google vão até ~05/11, por isso o gasto lá é maior (R$ 2.236 contra R$ 1.846). **Onde esta seção conflitar com as seguintes, vale esta.**
+
+| Canal | Invest. | Leads (CRM) | MQL | SQL | Vendas | CPL (CRM) |
+|---|---|---|---|---|---|---|
+| Google Ads | R$ 1.845,95 | 7 | 4 | 0 | 0 | R$ 263,71 |
+| Meta Ads | R$ 959,01 | 2 | 0 | 0 | 0 | R$ 479,50 |
+| Origem não informada | n/d | 1 | 0 | 0 | 0 | n/d |
+| **Total** | **R$ 2.804,96** | **10** | **4** | **0** | **0** | **R$ 280,50** (meta do painel: R$ 120) |
+
+Custo por MQL: **R$ 701**. Verba do mês: R$ 3.000 (Google R$ 2.000 + Meta R$ 1.000).
+
+**Respostas finais do cliente:** ignorar o fee e o export do RD; os prints do Google já foram enviados; **os leads do SuperMinas não são ICP**; **a SDR não foi para frente**.
+
+**Correções às conclusões anteriores**
+1. **O rastreio do Google Ads está subcontando.** O Google Ads registra 3 conversões, mas o CRM atribui 7 leads (4 MQL) ao Google. **Pelo menos 4 leads (57%) não têm conversão registrada.** Como a campanha de marca registra as 3 conversões e a de Solução registra 0, é provável que os outros leads tenham vindo das campanhas não-marca. Isso enfraquece duas conclusões minhas: "100% das conversões vêm da marca" e "zero conversão em 376 cliques não-marca". Também muda o diagnóstico da LP: **7 leads para 507 cliques do Google é ~1,4% de conversão, dentro da faixa de 1–3% (hipótese).** A LP não parece ser o problema principal no tráfego do Google. O problema de tráfego é o do Meta (Audience Network). **Pendência: a UTM de campanha e de termo dos 7 leads**, que a planilha já tem, para saber qual campanha e qual palavra os gerou.
+2. **O Meta no CRM custa R$ 479 por lead, não R$ 31.** A Meta reporta 6 a 8 leads, o CRM tem 2. Como os leads do SuperMinas não são ICP, o "melhor custo por lead da conta" (R$ 20–52) **não vale como modelo**: evento de supermercado com formulário nativo traz volume barato fora do ICP. Mantenho a ideia de formulário nativo só com perguntas de qualificação (segmento e nº de promotores) e só em eventos de distribuidor.
+3. **Os dados de outubro não sustentam "Meta como canal principal".** No CRM, Meta teve 2 leads e 0 MQL; Google teve 7 leads e 4 MQL. A hipótese de demanda criada por Meta continua válida, mas **não mensurada**. Recomendo manter a divisão do painel (Google R$ 2.000 / Meta R$ 1.000) no mês 1 e **limpar a configuração do Meta** em vez de aumentar a verba. A verba só sobe no canal que bater custo por MQL ≤ R$ 350.
+4. **Funil real de outubro:** lead→MQL 40% (4 de 10). MQL→SQL 0 de 4, mas são só 29 dias e o SQL só existe na etapa 4 (Discovery) do funil Promoter. 1 lead (10%) veio sem origem.
+5. **A régua de metas do painel não se sustenta.** O cenário "provável" (25 leads, CPL R$ 120, 8,8 MQL, 5,7 SQL, 2,8 vendas com R$ 3.000) implica 35% lead→MQL, 65% MQL→SQL e 49% SQL→venda. A realidade: CPL 2,3x acima da meta, e MQL→SQL ainda sem dado. **Recomendo recalibrar a régua** com a linha de base real.
+6. **Sem as listas da SDR**, os públicos de lista no Meta ficam sem fonte pronta (ver 0.10).
+
+**Linha de base corrigida (outubro, projetada para 31 dias):** R$ 3,0 mil, ~10,7 leads, ~4,3 MQL, R$ 701 por MQL. Com MQL→cliente de 5%, 8% e 12% **(hipóteses; o CRM não foi auditado)**:
+
+| MQL→cliente | Clientes/mês | CAC | MRR novo/mês |
+|---|---|---|---|
+| 5% | 0,2 | R$ 14,0 mil | R$ 0,5 mil |
+| 8% | 0,3 | R$ 8,8 mil | R$ 0,9 mil |
+| 12% | 0,5 | R$ 5,8 mil | R$ 1,3 mil |
+
+O CAC declarado pela empresa é de ~R$ 11 mil, então só a conversão de 8% ou mais fica dentro. **Hoje a mídia gera no máximo ~1 cliente a cada 2 a 3 meses.**
+
+**Meta do dia 90, corrigida:** reduzir o custo por MQL de R$ 701 para **≤ R$ 350** e chegar a **~13 MQL/mês com R$ 4,5 mil** (13 × R$ 350). Isso rende 0,65 a 1,6 cliente/mês (5% a 12%) com CAC de R$ 2,9 a 7,0 mil. É ambicioso (metade do custo e o triplo do volume) e depende de: (a) tirar o desperdício do Meta (Audience Network), (b) importar as conversões do CRM no Google Ads para o lance usar o dado real, (c) corrigir a origem dos leads sem UTM. **A meta de 2,8 vendas/mês do painel exigiria ~35 MQL/mês, ou ~R$ 12 mil/mês a R$ 350 por MQL.**
+
 ### 0.1 Verba real
 | | Gasto | Por dia | Leads | Custo por lead |
 |---|---|---|---|---|
@@ -34,7 +69,7 @@ Correção minha: a verba real (~R$ 2,9 mil/mês) bate com o plano de R$ 3 mil. 
 2. **O algoritmo foi para o clique barato.** A campanha otimiza para "lead pixel" com apenas 2 eventos. Com tão pouco sinal, a Meta busca o clique mais barato. A tendência confirma: a verba diária caiu de R$ 55–78 (11–14/10) para R$ 5–20 no fim de outubro, enquanto o CPC caiu para R$ 0,08 e o CTR passou de 20%.
 3. **O público segmentado por cargo (Trade/Merchandising/Supervisor de Vendas/Gerente Comercial) tem 0 leads** em R$ 207 e 536 LPV. O público aberto Advantage+ teve os 2 leads (anúncio "VD Avatar 30s", R$ 99 por lead), mas também é onde o Audience Network concentra cliques. **Amostra pequena demais para escolher público.**
 4. **O remarketing está contaminado.** O público "Visitantes site/LP 30d" inclui o tráfego lixo, e o alcance é de ~4,4 mil pessoas. R$ 195, 0 leads.
-5. **O formulário nativo com geolocalização foi o melhor da conta:** o anúncio "Superminas Vídeo 1" no raio de 40 km da Expominas (20–26/10) trouxe **5 leads com R$ 101, ou R$ 20 por lead**. Nos dias do evento (raio 5 km, R$ 115) e no remarketing (R$ 40), **0 leads**. Em 2026, APAS ([LEAD], R$ 291) deu 4 leads a R$ 73 cada. **Evento + formulário nativo + região converte a custo bem menor que LP fria (R$ 367).** Falta saber a qualidade desses leads (SuperMinas é evento de supermercado/varejo, não de distribuidor).
+5. **(INVALIDADO, ver 0.0)** **O formulário nativo com geolocalização foi o melhor da conta:** o anúncio "Superminas Vídeo 1" no raio de 40 km da Expominas (20–26/10) trouxe **5 leads com R$ 101, ou R$ 20 por lead**. Nos dias do evento (raio 5 km, R$ 115) e no remarketing (R$ 40), **0 leads**. Em 2026, APAS ([LEAD], R$ 291) deu 4 leads a R$ 73 cada. **Evento + formulário nativo + região converte a custo bem menor que LP fria (R$ 367).** Falta saber a qualidade desses leads (SuperMinas é evento de supermercado/varejo, não de distribuidor).
 6. **Todo o histórico 2026 da conta:** R$ 6.595 em 18 campanhas, 12 leads (R$ 550 por lead), 10.724 cliques e 2,06 milhões de impressões.
 
 ### 0.4 Diagnóstico da LP, agora com duas fontes
@@ -51,7 +86,7 @@ Tráfego "frio" real, sem Audience Network: 588 LPV (Meta) + 376 cliques (Google
 | Vídeos: "podemos gravar" | Ver 0.8. Já existem vídeos na conta (Avatar 30s, Rogério 18s, 2m19, 4m15); falta demonstração por caso de uso. |
 
 ### 0.6 Meta de clientes e verba, calculadas com os dados
-**Linha de base:** ~8,3 leads/mês (10 leads em 36 dias) a R$ 343 cada, com R$ 2,9 mil/mês. Sem o funil do RD, uso 5%, 8% e 12% de MQL→cliente **(hipóteses de B2B consultivo; trocar pelo real)**:
+**(Superada pela 0.0, que usa o CRM.)** **Linha de base:** ~8,3 leads/mês (10 leads em 36 dias) a R$ 343 cada, com R$ 2,9 mil/mês. Sem o funil do RD, uso 5%, 8% e 12% de MQL→cliente **(hipóteses de B2B consultivo; trocar pelo real)**:
 
 | MQL→cliente | Clientes/mês hoje | CAC | MRR novo/mês |
 |---|---|---|---|
@@ -136,20 +171,9 @@ Li esses três documentos por inteiro depois da versão anterior (antes eu tinha
 - **A indicação "já funciona" mas não é processo.** Prioridade 1 do plano comercial é formalizar a indicação dos clientes atuais. É a fonte mais barata e hoje sem medição.
 
 **O que a proposta de SDR muda**
-- É uma **proposta comercial paga** (SDR a R$ 1.990/mês + 3× R$ 990 de implantação, contrato mínimo de 6 meses, planos até R$ 3.590/mês). Eu havia usado as "listas A/B da SDR" como público de Meta. **Isso só existe se o projeto for contratado.** Se não for, a lista de contas precisa vir de outra fonte (RD, LinkedIn, base de clientes).
+- A proposta de SDR (R$ 1.990/mês + implantação, mínimo de 6 meses) **não foi para frente** (resposta do cliente). Então **não existem listas A/B da SDR**: os públicos de lista no Meta precisam vir de clientes atuais, de leads do CRM ou de listas de eventos de distribuidor.
 - A **Exact já foi avaliada pela TradePRO e descartada** ("não trouxe ganho suficiente"). Evitar propor ferramenta de SDR concorrente sem esse contexto.
 - A cadência (D0, D2–3, D5–6, D9–10, D14–15) é "hipótese operacional, não benchmark". Usar o mesmo critério ao comparar com resultado real.
-
-**Custo total do projeto e CAC "carregado"**
-O Planejamento lista o Combo Performance a **R$ 4.017,59/mês** (+ R$ 3.000 do Social Boost, que não entra aqui). Somando mídia (~R$ 2,9 mil), o custo mensal é ~R$ 6,9 mil. Com os cenários da seção 0.6:
-
-| MQL→cliente | Clientes/mês hoje | CAC só mídia | CAC com fee (R$ 6,9 mil/mês) |
-|---|---|---|---|
-| 5% | 0,4 | R$ 6,9 mil | R$ 16,4 mil |
-| 8% | 0,7 | R$ 4,3 mil | R$ 10,3 mil |
-| 12% | 1,0 | R$ 2,9 mil | R$ 6,9 mil |
-
-Na meta do dia 90 (R$ 4,5 mil de mídia + R$ 4,0 mil de fee = R$ 8,5 mil, 1,3 a 3 clientes/mês), o CAC com fee fica entre **R$ 2,8 e 6,5 mil**. **Só a meta do dia 90 cabe com folga no CAC de R$ 11 mil declarado;** a performance atual só cabe se a conversão for de 8% ou mais. **Confirmar se o fee ainda é esse valor.** A planilha de Forecasting tem um campo de fee e de margem, ambos zerados.
 
 **Ajustes ao plano por causa dessa leitura**
 1. **Uniformizar a mensagem antes de escalar:** trocar "controle" por "visibilidade" nos criativos 01/02 e testar a rota Ruptura e a rota Distribuidores com verba suficiente (hoje nenhuma foi testada de verdade).
