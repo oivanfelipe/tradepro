@@ -115,6 +115,50 @@ Usar cada um (a) na LP, (b) no Meta TOF, (c) no WhatsApp da SDR e (d) no LinkedI
 **Medição**
 1. Exportar do RD os 10 leads de outubro (origem, etapa, MQL/SQL, motivo de perda) e o histórico de MQL→SQL→venda dos últimos 6 meses.
 
+### 0.10 Complemento: leitura integral do Diagnóstico Comercial, da proposta SDR e do Manual de Copy
+
+Li esses três documentos por inteiro depois da versão anterior (antes eu tinha lido só trechos). O que muda:
+
+**Contradições entre o Manual de Copy e o que está no ar**
+1. **Os criativos 01 e 02 usam "controle" como mensagem** ("Mais controle para agir mais rápido", "Mais controle da execução"). O Manual manda evitar "controle" como mensagem central e preferir "visibilidade". A própria PUV do planejamento ainda tem a frase "Controle sua equipe…". Isso precisa ser uniformizado antes de escalar.
+2. **A rota "Distribuidores" do Manual (Meta, criativo 3) não está no ar.** No Meta rodam "Sua equipe está no PDV", "Planilhas espalhadas", "Ruptura é venda perdida" e os vídeos Avatar/Rogério. O criativo de Ruptura recebeu só R$ 5 e 136 impressões, então **ruptura nunca foi realmente testada**. O algoritmo concentrou a verba em "Planilhas espalhadas" (R$ 276) e "Avatar 30s" (R$ 257).
+3. **CTA de consideração mandando para página de alta intenção.** O Manual reserva "Agendar uma demonstração" para alta intenção e "Ver como funciona" / "Conhecer o Promoter" para consideração. Os criativos 01 e 02 usam "Conheça a plataforma" e "Conheça o Promoter", mas a LP só oferece demonstração. Falta uma página intermediária.
+4. **A LP no ar não segue o hero do Manual.** Manual: "Transforme execução de campo em informação para decidir mais rápido". LP: "Transforme a execução do PDV em decisões que geram resultado". Não é erro, mas não houve teste de qual converte mais.
+5. **O Google Ads do Manual só traz 2 grupos de anúncio** (software de trade marketing, gestão de promotores) e exige correspondência busca → título → LP. A conta tem 4 grupos e uma LP só, com IQ 2–4 em vários termos. Confirma H6.
+6. **Os conjuntos de persona não batem entre os documentos:** Planejamento (5 papéis), Estruturação Estratégica (5, com Financeiro e Promotor) e Manual (6, com Operações e Compras). No Meta, o público "Cargos B2B" cobre só Trade/Merchandising/Supervisor de Vendas/Gerente Comercial. **Proprietário/Diretoria (decisor econômico) e Operações não estão no público.** O Manual já traz a headline de cada um (por exemplo, "Crescer a operação sem crescer o improviso" para o proprietário) e nenhuma está em uso.
+
+**O que o Diagnóstico Comercial muda**
+- **CAC declarado pela empresa: ~R$ 11 mil (metodologia não validada).** Isso confirma o guarda-corpo de CAC ≤ R$ 10 mil que sugeri, e é a única âncora oficial.
+- **A demonstração é o padrão e o teste gratuito aberto "não é recomendado".** Piloto só para conta elegível. Então não recomendo trial como alavanca. O caminho é vídeo + demonstração gravada + formulário curto.
+- **Funil de 10 etapas no Promoter, com SQL só na etapa 4 (Discovery).** "Pedido de demonstração sozinho não deve ser SQL." Isso reforça medir por custo por SQL, não por lead.
+- **O CRM não foi auditado** e o ciclo de vendas diverge entre fontes. Sem isso, o MQL→cliente continua hipótese. Conferir antes de usar qualquer taxa.
+- **A SDR teve boa velocidade, mas discovery superficial.** Isso derruba a conversão MQL→SQL e vale mais que qualquer ajuste de mídia. Um lead que não é bem qualificado não vira SQL, qualquer que seja o canal.
+- **A indicação "já funciona" mas não é processo.** Prioridade 1 do plano comercial é formalizar a indicação dos clientes atuais. É a fonte mais barata e hoje sem medição.
+
+**O que a proposta de SDR muda**
+- É uma **proposta comercial paga** (SDR a R$ 1.990/mês + 3× R$ 990 de implantação, contrato mínimo de 6 meses, planos até R$ 3.590/mês). Eu havia usado as "listas A/B da SDR" como público de Meta. **Isso só existe se o projeto for contratado.** Se não for, a lista de contas precisa vir de outra fonte (RD, LinkedIn, base de clientes).
+- A **Exact já foi avaliada pela TradePRO e descartada** ("não trouxe ganho suficiente"). Evitar propor ferramenta de SDR concorrente sem esse contexto.
+- A cadência (D0, D2–3, D5–6, D9–10, D14–15) é "hipótese operacional, não benchmark". Usar o mesmo critério ao comparar com resultado real.
+
+**Custo total do projeto e CAC "carregado"**
+O Planejamento lista o Combo Performance a **R$ 4.017,59/mês** (+ R$ 3.000 do Social Boost, que não entra aqui). Somando mídia (~R$ 2,9 mil), o custo mensal é ~R$ 6,9 mil. Com os cenários da seção 0.6:
+
+| MQL→cliente | Clientes/mês hoje | CAC só mídia | CAC com fee (R$ 6,9 mil/mês) |
+|---|---|---|---|
+| 5% | 0,4 | R$ 6,9 mil | R$ 16,4 mil |
+| 8% | 0,7 | R$ 4,3 mil | R$ 10,3 mil |
+| 12% | 1,0 | R$ 2,9 mil | R$ 6,9 mil |
+
+Na meta do dia 90 (R$ 4,5 mil de mídia + R$ 4,0 mil de fee = R$ 8,5 mil, 1,3 a 3 clientes/mês), o CAC com fee fica entre **R$ 2,8 e 6,5 mil**. **Só a meta do dia 90 cabe com folga no CAC de R$ 11 mil declarado;** a performance atual só cabe se a conversão for de 8% ou mais. **Confirmar se o fee ainda é esse valor.** A planilha de Forecasting tem um campo de fee e de margem, ambos zerados.
+
+**Ajustes ao plano por causa dessa leitura**
+1. **Uniformizar a mensagem antes de escalar:** trocar "controle" por "visibilidade" nos criativos 01/02 e testar a rota Ruptura e a rota Distribuidores com verba suficiente (hoje nenhuma foi testada de verdade).
+2. **Criar a página intermediária** ("Ver como funciona": vídeo + 3 casos de uso) para os CTAs de consideração, em vez de mandar tudo para a demonstração.
+3. **Incluir Proprietário/Diretoria e Operações** nos públicos e criativos, com as headlines do Manual.
+4. **Ativos com números: só dados do cliente.** O Manual proíbe percentuais sem metodologia ("segundo o cliente…"). A calculadora de perda por ruptura só pode usar números que o próprio usuário digita, sem benchmark inventado.
+5. **Medir o ganho por SQL, não por lead,** e auditar a etapa de Discovery da SDR junto, porque é o maior vazamento pós-lead identificado.
+6. **Formalizar a indicação** como canal medido (Prioridade 1 do plano comercial).
+
 ---
 
 ## 1. O cliente
@@ -166,7 +210,7 @@ A TradePRO fica no meio: robustez + proximidade + implantação. Ela tem lacunas
 | 3 | **Uma LP só para 4 temas.** Muitos termos têm IQ 2–4 (merchandising, auditoria de pdv, execução, ruptura no pdv, controle de promotores). | Prints. |
 | 4 | **Lite e Promoter estão misturados.** "app/aplicativo para promotores" são ~41 cliques de baixo custo e baixa intenção. É cara de Lite, mas cai no funil de demo consultiva do Promoter. | Prints. |
 | 5 | **O único CTA é "agendar demo".** Não há trial, preço, vídeo nem material intermediário. Só ~5% do mercado está pronto para comprar agora. | LP. |
-| 6 | **Persona não aparece na mídia.** Não há criativo para o champion (Trade) nem para o decisor (Comercial). | Criativos 01–03 são genéricos "sua equipe está no PDV". |
+| 6 | **Persona não aparece na mídia.** O Manual de Copy tem headline por persona (Trade, Diretor Comercial, Proprietário, Operações, TI, Compras), mas os criativos 01–03 usam só a rota "visibilidade". Ver também 0.10. | Criativos 01–03, Manual de Copy cap. 10. |
 | 7 | **Plano, budget e forecast não batem.** Plano diz R$ 3 mil/mês, diagnóstico diz R$ 5 mil, os daily budgets somam ~R$ 66,7/dia (~R$ 2 mil/mês). O Forecasting Inside Sales está **zerado**. | PDFs, prints, planilha. |
 | 8 | **O Meta foi definido como "suporte" (R$ 900)** e agora a hipótese é torná-lo principal. É uma mudança de estratégia que precisa ser decidida de forma explícita. | Planejamento, bloco 6. |
 
