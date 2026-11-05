@@ -183,6 +183,67 @@ Li esses três documentos por inteiro depois da versão anterior (antes eu tinha
 5. **Medir o ganho por SQL, não por lead,** e auditar a etapa de Discovery da SDR junto, porque é o maior vazamento pós-lead identificado.
 6. **Formalizar a indicação** como canal medido (Prioridade 1 do plano comercial).
 
+### 0.11 Plano de melhoria do Meta (somente plano; nada foi alterado na conta)
+
+**Premissa:** com R$ 1.000/mês (CPM real de R$ 25,65) são ~39 mil impressões, ou ~26 mil pessoas com frequência de 1,5. O universo de decisores de distribuidor é pequeno, então isso basta, **se a entrega for para as pessoas certas**. Hoje não é.
+
+#### Onde o Meta se perde (dados da campanha de LP, 01/10 a 05/11, R$ 734)
+| # | Problema | Evidência |
+|---|---|---|
+| 1 | **Entrega para quem não decide** | 65+ recebeu **R$ 360 (49%)**; 55+ recebeu R$ 474 (**65%**); 25–44, o núcleo do ICP, só R$ 163 (**22%**). Os 2 leads vieram de 25–34 e 65+. |
+| 2 | **Tráfego lixo** | Audience Network: 13% da verba, **61% dos cliques, 62% dos LPV, 0 leads**. Rewarded video com CTR de 35% e CPC de R$ 0,04. |
+| 3 | **99,9% mobile-app** | 31.057 de 31.153 impressões. Desktop: 45 impressões. O gestor que decide em horário de trabalho quase não é alcançado. |
+| 4 | **Otimização sem sinal** | O conjunto otimiza para "lead pixel" com 2 eventos. A Meta precisa de ~50 eventos/semana, então ela busca o clique mais barato. |
+| 5 | **36% dos cliques nem carregam a LP** | 63,5% de LPV/clique mesmo sem Audience Network. Coerente com o LCP mobile alto apontado no diagnóstico. |
+| 6 | **Remarketing minúsculo e contaminado** | ~4,4 mil pessoas, com visitantes do tráfego lixo no público. R$ 195, 0 leads. |
+| 7 | **Rotas de criativo sem teste** | Ruptura: R$ 5 e 136 impressões. Distribuidores: sem anúncio. "Controle" nos criativos 01/02 contraria o Manual. |
+| 8 | **Um CTA só e formulário longo** | Só demonstração; 7 campos obrigatórios no mobile. |
+| 9 | **Lead sem qualificação e sem origem** | A Meta reporta 6–8 leads, o CRM tem 2. O formulário nativo trouxe leads fora do ICP. 1 em cada 10 leads chega sem UTM. |
+
+#### Como melhorar, em 3 etapas
+
+**Etapa 1: higiene, custo zero (semana 1)**
+1. **Posicionamentos manuais:** só Feed, Reels e Stories de Facebook e Instagram. Sem Audience Network, Marketplace, Search, Threads nem instream.
+2. **Idade 28–55** como restrição (desligar a expansão automática do Advantage+ audience, ou fixar a faixa como limite). Dispositivo: testar um conjunto só com desktop e tablet.
+3. **Origem em 100% dos leads:** UTM em todos os anúncios (`utm_source=meta&utm_campaign=…&utm_content=anúncio`), campos ocultos no formulário e Conversions API. Meta: zero lead sem origem.
+4. **Velocidade da LP no mobile:** WebP, scripts em *defer*, hero leve. Recuperar os 36% de cliques perdidos vale mais que qualquer ajuste de anúncio.
+5. **Remarketing limpo:** recriar o público de visitantes só com quem ficou 10+ s ou chegou a 50% de scroll. Excluir o tráfego antigo do Audience Network.
+
+**Etapa 2: nova estrutura (semanas 2–4), mantendo os R$ 1.000/mês do painel**
+| Campanha | Verba | Público | Objetivo/otimização |
+|---|---|---|---|
+| **A. Topo (ICP)** | R$ 600 (R$ 20/dia) | 2 conjuntos: (1) cargos Trade/Merchandising/Comercial + interesses de distribuição (ABAD, APAS, Sankhya, WinThor, TOTVS); (2) **Dono/Diretoria de distribuidor e atacadista**. 28–55. | Evento personalizado de **visita qualificada** (10+ s + scroll 50% ou clique no CTA), via pixel + CAPI, para ter ~50 eventos/semana. |
+| **B. Remarketing** | R$ 250 (R$ 8/dia) | Visitantes limpos 30d, vídeo 75%+ 30–60d, engajou IG 90d. Excluir leads 60d e clientes. | Lead com formulário curto ou WhatsApp. |
+| **C. Teste de oferta** | R$ 150 | Mesmo público de A | Comparar: (i) "Ver como funciona" (vídeo + 3 casos de uso) × (ii) "Agendar demonstração" × (iii) conversa no WhatsApp com pergunta de qualificação. |
+
+**Criativos (Manual de Copy):** 3 rotas × 2 formatos, começando por duas:
+- **Rota Ruptura** ("Você descobre a ruptura quando ainda dá tempo de agir?"), vídeo de demonstração de 60–90 s.
+- **Rota Distribuidores** ("Mais PDVs exigem mais visibilidade, não mais planilhas").
+- Depois: Visibilidade (já rodando) e uma rota para o **Proprietário** ("Crescer a operação sem crescer o improviso").
+- Tirar "controle". CTA de consideração para público frio e alta intenção só no remarketing.
+- Prova: depoimentos que já existem (Pegoraro Deycon, First Trade, Simões & Dantas), com autorização.
+
+**Formulário e qualificação:** 4 campos no mobile (nome, e-mail, WhatsApp, nº de pessoas no campo) e **uma pergunta de segmento** (distribuidor / indústria / agência / varejo). Isso barra o tipo de lead do SuperMinas antes de chegar ao comercial. Leads de varejo vão para nutrição.
+
+**Etapa 3: regras de decisão (dias 14, 30 e 60)**
+| Quando | Indicador | Meta |
+|---|---|---|
+| Dia 14 | Impressões em 28–55 anos | ≥ 80% |
+| Dia 14 | Audience Network e 55+ | 0% |
+| Dia 14 | LPV/clique | ≥ 85% |
+| Dia 14 | Eventos de visita qualificada | ~50/semana |
+| Dia 30 | Leads no CRM com origem Meta | ≥ 5 |
+| Dia 30 | CPL no CRM | ≤ R$ 300 |
+| Dia 60 | Custo por MQL | ≤ R$ 350 → escalar o que funcionou |
+| Dia 60 | Custo por MQL | R$ 350–700 → manter e otimizar |
+| Dia 60 | Custo por MQL | > R$ 700 com ≥ R$ 2 mil gastos → reduzir o Meta a remarketing e mover a verba para o Google |
+
+**Expectativas honestas**
+- **O CPC vai subir** (hoje R$ 0,31, com tráfego lixo). Ao limpar posicionamento e idade, deve ir para a faixa de R$ 1–2 (hipótese). É um bom sinal, não um problema.
+- Com R$ 1.000/mês, o Meta **não vai entregar volume de MQL.** O papel é criar alcance qualificado e alimentar o remarketing. Ele deve ser avaliado por indicadores de meio (visita qualificada, retenção de vídeo, remarketing) e pelo crescimento da busca de marca no Google, além do MQL.
+- Em 60 dias serão ~R$ 2 mil e talvez 6–10 leads. A amostra é pequena; por isso as regras do dia 14 e 30 usam indicadores de meio.
+- Se o objetivo for volume de MQL no curto prazo, os dados de outubro apontam para o Google.
+
 ---
 
 ## 1. O cliente
