@@ -1,10 +1,119 @@
 # TradePRO — Análise completa e plano de ação (nov/2026)
 
 > **Limites desta análise**
-> - **Meta Ads:** a conta `538172087220579` **não está conectada ao Windsor** (o Windsor só lista 18 contas Meta, nenhuma é a da TradePRO). Não existem números de Meta aqui, só o histórico do diagnóstico da V4. A TradePRO também não aparece no Windsor para Google Ads, GA4 ou Search Console.
+> - **Meta Ads:** a conta `538172087220579` (nome no Windsor: "MobileSys Anuncios", campanhas com prefixo [TP]) foi autorizada e os dados reais estão na seção **0 (Atualização de 05/11)**. As seções 1–7 foram escritas antes disso. Onde houver conflito, vale a seção 0.
+> - **Google, GA4, Search Console e RD Station:** continuam fora do Windsor. Google segue só pelos prints.
 > - **Google Ads:** análise feita só pelos prints (4 campanhas, período não informado, provavelmente desde a reestruturação de 13/10).
 > - **LP:** li o texto extraído. Não medi velocidade, não vi o layout e não testei rastreamento.
 > - Onde há benchmark de mercado ou hipótese minha, está marcado como **(hipótese)**.
+
+---
+
+## 0. Atualização de 05/11: dados reais do Meta e respostas do cliente
+
+**Período:** 01/10 a 05/11 (Google, prints) e as campanhas Meta ativas desde 09/10. Fonte Meta: Windsor.
+
+### 0.1 Verba real
+| | Gasto | Por dia | Leads | Custo por lead |
+|---|---|---|---|---|
+| Google (4 campanhas, 36 dias) | R$ 2.236 | R$ 62 | 3 (MQL, todos na marca) | R$ 745 (marca: R$ 94) |
+| Meta (3 campanhas, desde 09/10) | R$ 1.189 | R$ 42 | 7 | R$ 170 |
+| **Total** | **R$ 3.425** | **R$ 95 (~R$ 2,9 mil/mês)** | **10** | **R$ 343** |
+
+Correção minha: a verba real (~R$ 2,9 mil/mês) bate com o plano de R$ 3 mil. Eu havia lido só o Google (~R$ 2 mil) e achado a verba baixa demais. A divisão real é ~65% Google / 35% Meta.
+
+### 0.2 Meta por campanha (desde 01/10)
+| Campanha | Gasto | Impr. | Cliques | LPV | Leads | Custo/lead |
+|---|---|---|---|---|---|---|
+| [LEADS][LP][Promoter] 09/10 | R$ 734 | 31.147 | 2.378 | 1.530 | 2 | R$ 367 |
+| [LEADS][RMK][Vídeos] 14/10 | R$ 195 | 5.501 | 346 | 210 | 0 | — |
+| [LEADS][FORM][SUPERMINAS] 20/10 | R$ 260 | 6.821 | 138 | n/a | 5 | R$ 52 |
+
+### 0.3 O que os dados mostram
+1. **A campanha de LP está inflada por tráfego lixo do Audience Network.** Só o *rewarded video* teve 3.329 impressões, **1.159 cliques (CTR 35%, CPC R$ 0,04)** e 784 LPV, **0 leads**. Somando o *an_classic*, o Audience Network gerou **61% dos cliques e 62% dos LPV com 13% da verba, e nenhum lead**. Cliques de anúncio de recompensa dentro de jogos são, em geral, acidentais **(hipótese; confirmar pelo tempo de permanência na LP)**. Sem o Audience Network sobram 926 cliques, 588 LPV e 2 leads (0,34% LPV→lead).
+2. **O algoritmo foi para o clique barato.** A campanha otimiza para "lead pixel" com apenas 2 eventos. Com tão pouco sinal, a Meta busca o clique mais barato. A tendência confirma: a verba diária caiu de R$ 55–78 (11–14/10) para R$ 5–20 no fim de outubro, enquanto o CPC caiu para R$ 0,08 e o CTR passou de 20%.
+3. **O público segmentado por cargo (Trade/Merchandising/Supervisor de Vendas/Gerente Comercial) tem 0 leads** em R$ 207 e 536 LPV. O público aberto Advantage+ teve os 2 leads (anúncio "VD Avatar 30s", R$ 99 por lead), mas também é onde o Audience Network concentra cliques. **Amostra pequena demais para escolher público.**
+4. **O remarketing está contaminado.** O público "Visitantes site/LP 30d" inclui o tráfego lixo, e o alcance é de ~4,4 mil pessoas. R$ 195, 0 leads.
+5. **O formulário nativo com geolocalização foi o melhor da conta:** o anúncio "Superminas Vídeo 1" no raio de 40 km da Expominas (20–26/10) trouxe **5 leads com R$ 101, ou R$ 20 por lead**. Nos dias do evento (raio 5 km, R$ 115) e no remarketing (R$ 40), **0 leads**. Em 2026, APAS ([LEAD], R$ 291) deu 4 leads a R$ 73 cada. **Evento + formulário nativo + região converte a custo bem menor que LP fria (R$ 367).** Falta saber a qualidade desses leads (SuperMinas é evento de supermercado/varejo, não de distribuidor).
+6. **Todo o histórico 2026 da conta:** R$ 6.595 em 18 campanhas, 12 leads (R$ 550 por lead), 10.724 cliques e 2,06 milhões de impressões.
+
+### 0.4 Diagnóstico da LP, agora com duas fontes
+Tráfego "frio" real, sem Audience Network: 588 LPV (Meta) + 376 cliques (Google não-marca) = ~964 visitas, **2 leads**. **Conversão ~0,2%.** Benchmark de LP B2B de demonstração: 1–3% **(hipótese)**. Dois canais diferentes, o mesmo resultado, em audiências distintas. Isso aponta para a **LP/oferta (ou para o rastreio)**, não para um canal. O que contraria: os 3 leads da marca (MQL) convertem na mesma LP, mas são pessoas que já conhecem a TradePRO.
+
+### 0.5 Respostas do cliente e o que mudam
+| Resposta | Efeito |
+|---|---|
+| Os 3 leads do Google **viraram MQL** | A marca é a única fonte validada: 3 MQL a R$ 94. Mas não escala (160 cliques/mês). |
+| Período: 01/10 a hoje | Confirmado nas contas acima. |
+| "Demand Gen" = **campanha do Google** | Ver 0.7. |
+| Verba: "pode sugerir" | Ver 0.6. |
+| Meta de clientes: "calcule" | Ver 0.6. |
+| Vídeos: "podemos gravar" | Ver 0.8. Já existem vídeos na conta (Avatar 30s, Rogério 18s, 2m19, 4m15); falta demonstração por caso de uso. |
+
+### 0.6 Meta de clientes e verba, calculadas com os dados
+**Linha de base:** ~8,3 leads/mês (10 leads em 36 dias) a R$ 343 cada, com R$ 2,9 mil/mês. Sem o funil do RD, uso 5%, 8% e 12% de MQL→cliente **(hipóteses de B2B consultivo; trocar pelo real)**:
+
+| MQL→cliente | Clientes/mês hoje | CAC | MRR novo/mês |
+|---|---|---|---|
+| 5% | 0,4 | R$ 6,9 mil | R$ 1,1 mil |
+| 8% | 0,7 | R$ 4,3 mil | R$ 1,7 mil |
+| 12% | 1,0 | R$ 2,9 mil | R$ 2,6 mil |
+
+**Correção de uma leitura anterior:** eu tratei um CAC de R$ 15–25 mil como alarmante. Com ticket de R$ 2.550/mês e o churn simulado de 15% a.a. do planejamento (o real não está medido), o LTV de receita é ~R$ 200 mil. Até R$ 10 mil de CAC (~4 meses de receita) é saudável. **O gargalo é volume e caixa, não unit economics.**
+
+**Para 3 clientes/mês** (cenário do planejamento) são ~38 MQL/mês a 8%. A R$ 343 de CPL seriam R$ 12,9 mil/mês; a R$ 150, R$ 5,6 mil/mês.
+
+**Meta sugerida para o dia 90:**
+- **25 MQL/mês com CPL ≤ R$ 180** → R$ 4,5 mil/mês
+- Isso rende **1,3 a 3 clientes/mês** (5% a 12%), MRR novo de R$ 3,2 a 7,7 mil/mês
+- Guarda-corpo: CAC ≤ R$ 10 mil
+- Exige cortar o desperdício (Audience Network, termos amplos do Google) e corrigir a LP, não só aumentar verba
+
+**Verba sugerida:** manter ~R$ 3 mil no mês 1 (realocada, sem dinheiro novo); subir para **R$ 4,5 mil** no mês 2 **se** os gates do mês 1 forem batidos (rastreio validado + custo por MQL ≤ R$ 250); só chegar a R$ 6 mil no mês 3 com dados de MQL→SQL.
+
+| Frente (R$ 4,5 mil) | R$/mês | % |
+|---|---|---|
+| Google Search (marca 250 + Distribuidores 700 + Dor/Solução refinada 750) | 1.700 | 38% |
+| Meta: TOF + vídeo sem Audience Network (700), formulário nativo/eventos (400), remarketing (250), ativo pilar (250) | 1.600 | 36% |
+| Google Demand Gen (a partir do mês 2) | 600 | 13% |
+| Reserva de teste (evento regional, LinkedIn micro) | 600 | 13% |
+| Concorrentes | 0 (pausar) | — |
+
+### 0.7 Demand Gen do Google: validação
+**Vale como teste do mês 2, não como aposta agora.**
+- **A favor:** cria demanda fora da busca (YouTube, Discover, Gmail), aceita **segmentos personalizados** por palavras-chave e URLs de concorrentes (público com intenção de busca sem a limitação de volume do Search) e **Customer Match** da base. A marca é o que converte, então qualquer coisa que aumente a busca de marca é positiva.
+- **Contra:** a verba é pequena, o rastreio ainda não é confiável e o histórico de vídeo no Google foi R$ 17 mil sem lead, porque era CPM de destino. Sem ~30 conversões/mês não há lance por conversão estável.
+- **Como testar:** R$ 20/dia (R$ 600/mês), 2 vídeos + 2 imagens, lance de maximizar cliques, depois conversões. Segmentos: (1) pesquisaram "software/sistema de trade marketing", "gestão de promotores", "controle de ruptura" e (2) URLs de Involves, MáximaTech, PDV Mundo. Excluir clientes e leads.
+- **Métrica de sucesso:** não é lead direto. É custo por LPV ≤ R$ 1,50, **crescimento semanal de impressões e cliques da busca de marca** e conversões assistidas.
+- **Pré-requisito:** rastreio validado e o Meta já limpo.
+
+### 0.8 Vídeos de demonstração (a gravar)
+Roteiros por caso de uso, 60–90 s, tela do produto + voz, sem apresentação institucional:
+1. **Ruptura em tempo real:** do alerta no campo ao painel do gestor (hook: "Quanto tempo leva para você saber que faltou produto na loja?").
+2. **Planejado × realizado:** roteiro de visitas e check-in com geolocalização.
+3. **Foto como evidência:** comprovação de execução sem WhatsApp.
+4. **Validade e preço:** coleta estruturada no PDV.
+5. **Integração Sankhya/WinThor:** do ERP para o campo e de volta.
+
+Usar cada um (a) na LP, (b) no Meta TOF, (c) no WhatsApp da SDR e (d) no LinkedIn orgânico. Gravar numa única sessão de ~3 h com a equipe de implantação.
+
+### 0.9 Ações imediatas (aguardam sua aprovação; não alterei nenhuma conta)
+**Meta**
+1. Excluir **Audience Network** (e *rewarded video*) de todas as campanhas.
+2. Trocar a otimização da campanha de LP: de "lead pixel" (2 eventos) para visita à LP ou, melhor, **formulário nativo com WhatsApp**, que já deu R$ 20–73 por lead.
+3. Refazer o remarketing: excluir o tráfego lixo, usar quem assistiu 50%+ do vídeo.
+4. Replicar o modelo "evento + região + formulário nativo" para o calendário de feiras de **distribuidores** (ABAD, APAS), não de varejo.
+5. Validar no RD a qualidade dos 5 leads do SuperMinas antes de repetir.
+
+**Google**
+1. Relatório de termos de pesquisa + lista de negativas; reduzir "solução trade marketing" e "merchandising".
+2. Pausar "involves stage"; criar a campanha Distribuidores; tirar "app para promotores" do funil de demo.
+
+**LP**
+1. Formulário curto, vídeo no hero, WhatsApp fixo, LP por tema.
+
+**Medição**
+1. Exportar do RD os 10 leads de outubro (origem, etapa, MQL/SQL, motivo de perda) e o histórico de MQL→SQL→venda dos últimos 6 meses.
 
 ---
 
