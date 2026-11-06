@@ -1,6 +1,7 @@
 # TradePRO: roteiros de vídeo por produto (Dor → Solução → Benefício)
 
 > **Uso:** roteiros para gravação. Nenhum anúncio ou conta foi alterado.
+> **Atualização:** a página "Ver como funciona" saiu da estrutura. Cada vídeo leva à LP do seu produto (Promoter e Enterprise → LP Promoter; Lite → LP Lite). Para o Meta, veja também `ROTEIROS_META_PRODUTOS.md`.
 > **Estrutura de todos os roteiros:** **DOR** (situação real e consequência) → **SOLUÇÃO** (a funcionalidade na tela) → **BENEFÍCIO** (o que o cliente passa a conseguir fazer). Depois, assinatura e CTA.
 > **Os rótulos DOR / SOLUÇÃO / BENEFÍCIO são só para produção.** O Manual de Copy exige que o framework seja invisível para o cliente: nunca escrever "dor" ou "solução" na tela.
 > **Base:** Manual de Copy, Planejamento Estratégico (Promoter no centro, Lite como entrada, Enterprise como o mesmo produto vendido de outro jeito) e a LP atual.
@@ -10,7 +11,7 @@
 > - Benefício sempre em termos operacionais: mais tempo para agir, menos retrabalho, comprovação sem depender de relato, decisão mais rápida. Sem promessa absoluta.
 > - Integração: só o que a LP já cita (Sankhya e WinThor), **validada com o time técnico antes de gravar**.
 > - Mostrar **tela real**. `[TELA: …]` indica a tela a gravar; o time de produto confirma qual. Eu não vi a interface.
-> - CTA por estágio: frio, "Ver como funciona"; remarketing, "Agendar uma demonstração"; Lite, "Ver como começar"; Enterprise, "Falar com um especialista".
+> - CTA por estágio: Promoter, "Agendar uma demonstração"; Lite, "Ver como começar"; Enterprise, "Falar com um especialista".
 > - Formato padrão: vertical 9:16, legenda queimada, a DOR começa em até 3 segundos.
 
 ---
@@ -50,7 +51,7 @@
 
 ## P1. Ruptura: descobrir tarde demais
 **Rota Meta:** Ruptura | **Persona:** Diretor Comercial e Gestor de Trade | **Duração:** 60–75 s (corte de 20 s para topo)
-**CTA:** topo "Ver como funciona"; remarketing "Agendar uma demonstração"
+**CTA:** "Agendar uma demonstração" (LP Promoter)
 
 | Bloco | Cena | Imagem | Voz | Texto na tela |
 |---|---|---|---|---|
@@ -59,13 +60,13 @@
 | **SOLUÇÃO** | 3 (20–40 s) | `[TELA: registro de ruptura na visita]` | "Com o TradePRO Promoter, a equipe registra a ruptura durante a visita, no ponto de venda." | Registro na visita |
 | **SOLUÇÃO** | 4 (40–52 s) | `[TELA: painel de ruptura por loja/região]` | "A informação chega organizada à gestão, loja por loja." | Visão da gestão |
 | **BENEFÍCIO** | 5 (52–65 s) | Gestor decidindo com o painel aberto | "Você enxerga onde está faltando produto e age enquanto ainda dá tempo." | Mais tempo para agir |
-| Fecho | 6 | Logo | "TradePRO. Do campo à decisão." | Ver como funciona → |
+| Fecho | 6 | Logo | "TradePRO. Do campo à decisão." | Agendar uma demonstração → |
 
 **Corte de 20 s (topo):** cenas 1, 2 (primeira frase), 4 e 5.
 **Ganchos para teste:** A) "Ruptura descoberta tarde é oportunidade perdida." B) "Quanto tempo leva até a gestão saber que faltou produto na loja?"
 
 ## P2. Visitas e rotas: planejado × realizado
-**Rota Meta:** Visibilidade | **Persona:** Gestor de Trade | **Duração:** 60–75 s | **CTA:** "Ver como funciona"
+**Rota Meta:** Visibilidade | **Persona:** Gestor de Trade | **Duração:** 60–75 s | **CTA:** "Agendar uma demonstração" (LP Promoter)
 
 | Bloco | Cena | Imagem | Voz | Texto na tela |
 |---|---|---|---|---|
@@ -75,7 +76,7 @@
 | **SOLUÇÃO** | 4 | `[TELA: check-in no PDV com geolocalização]` | "Cada visita é registrada no ponto de venda." | Registro da visita |
 | **SOLUÇÃO** | 5 | `[TELA: comparativo planejado × realizado]` | "E o planejado e o realizado ficam lado a lado." | Planejado × realizado |
 | **BENEFÍCIO** | 6 | Gestor com o painel, sem planilha | "Você acompanha a execução sem juntar informação à mão e sabe onde agir." | Sem juntar informação à mão |
-| Fecho | 7 | Logo | "Visibilidade da operação. Do campo à decisão." | Ver como funciona → |
+| Fecho | 7 | Logo | "Visibilidade da operação. Do campo à decisão." | Agendar uma demonstração → |
 
 **Linguagem:** na cena 4, falar de **registro da visita**, nunca de "vigiar" o promotor.
 
@@ -92,7 +93,7 @@
 | Fecho | 6 | Logo | "TradePRO. Do campo à decisão." | Conhecer o Promoter → |
 
 ## P4. Validade e preço no PDV
-**Rota Meta:** Ruptura/Gestão | **Persona:** Gestor de Trade e Comercial | **Duração:** 45–60 s | **CTA:** "Ver como funciona"
+**Rota Meta:** Ruptura/Gestão | **Persona:** Gestor de Trade e Comercial | **Duração:** 45–60 s | **CTA:** "Agendar uma demonstração" (LP Promoter)
 
 | Bloco | Cena | Imagem | Voz | Texto na tela |
 |---|---|---|---|---|
@@ -101,7 +102,7 @@
 | **SOLUÇÃO** | 3 | `[TELA: pesquisa de preço e formulário de validade]` | "No Promoter, a equipe registra preço e validade de forma estruturada, no próprio PDV." | Registro padronizado |
 | **SOLUÇÃO** | 4 | `[TELA: relatório consolidado]` | "A gestão vê o consolidado de todas as lojas." | Visão consolidada |
 | **BENEFÍCIO** | 5 | Gestor priorizando ações | "Você age antes de o problema virar perda." | Antes de virar perda |
-| Fecho | 6 | Logo | "TradePRO. Do campo à decisão." | Ver como funciona → |
+| Fecho | 6 | Logo | "TradePRO. Do campo à decisão." | Agendar uma demonstração → |
 
 ## P5. O ERP e a ponta
 **Rota Meta:** Distribuidores | **Persona:** Diretor Comercial e TI | **Duração:** 60 s | **CTA:** "Conversar com um especialista"
@@ -217,7 +218,7 @@
 ## Como usar cada vídeo (nada é alterado em conta até você aprovar)
 | Uso | Vídeos | Observação |
 |---|---|---|
-| Meta, topo | Cortes de 15–20 s de P1, P2, P6, L1 | CTA "Ver como funciona" |
+| Meta, topo | Cortes de 15–20 s de P1, P2, P6, L1 | CTA "Agendar uma demonstração" |
 | Meta, remarketing | P3, P4, P5, depoimento | CTA "Agendar uma demonstração" |
 | LP (hero ou 2ª dobra) | P1 ou P2 completo | Demonstração antes do formulário |
 | WhatsApp do comercial | P1, P5 | Troca o "manda material" por vídeo |

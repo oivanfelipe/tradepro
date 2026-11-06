@@ -13,7 +13,7 @@
 - **Posicionamentos manuais**, sem Audience Network, como na higiene do Meta.
 - **Cada vídeo também forma público:** quem assiste entra no público do pixel (vídeo visto) e passa a receber conteúdo.
 - **Nome do anúncio e UTM:** `utm_content=meta-<produto>-<gancho>` (ex.: `meta-promoter-ganchoA`, `meta-lite-ganchoA`).
-- **Destino do clique: a definir** (ver o fim do documento). Cada roteiro termina com um espaço `[CTA]` para isso.
+- **Destino do clique: a LP do produto do vídeo** (ver o fim do documento). Cada roteiro termina com o CTA do produto.
 
 ---
 
@@ -31,7 +31,7 @@
 | **SOLUÇÃO** | 3 | `[TELA: roteiro e check-in da visita]` | "No TradePRO Promoter, a equipe registra a visita no ponto de venda: ruptura, preço, validade e fotos." | Registro na visita |
 | **SOLUÇÃO** | 4 | `[TELA: painel de gestão por loja e região]` | "E a informação chega organizada à gestão, loja por loja." | Visão da gestão |
 | **BENEFÍCIO** | 5 | Gestor decidindo com o painel aberto | "Você enxerga a operação, age enquanto ainda dá tempo e decide com mais clareza." | Mais tempo para agir |
-| Fecho | 6 | Logo | "TradePRO Promoter. Do campo à decisão." | `[CTA]` |
+| Fecho | 6 | Logo | "TradePRO Promoter. Do campo à decisão." | Agendar uma demonstração → LP Promoter |
 
 **Corte curto:** cenas 1, 3, 4 e 5 (corta a segunda frase da dor).
 
@@ -55,7 +55,7 @@
 | **DOR** | 2 | Planilha com visitas anotadas e fotos soltas | "Visita anotada aqui, foto enviada ali. Cada pessoa registra de um jeito." | Cada um registra de um jeito |
 | **SOLUÇÃO** | 3 | `[TELA: app do Lite, equipe e visitas]` | "Com o TradePRO Lite, as visitas e os registros da sua equipe ficam em um só lugar." | Tudo em um só lugar |
 | **BENEFÍCIO** | 4 | Gestor tranquilo com o resumo aberto | "Você começa a organizar o campo de forma simples, sem criar um processo pesado." | Organização, sem complexidade |
-| Fecho | 5 | Logo | "TradePRO Lite. Menos planilha. Mais organização." | `[CTA]` |
+| Fecho | 5 | Logo | "TradePRO Lite. Menos planilha. Mais organização." | Ver como começar → LP Lite |
 
 **Corte curto:** cenas 1, 3 e 4.
 
@@ -81,7 +81,7 @@
 | **SOLUÇÃO** | 3 | Levantamento e escopo | "O TradePRO Promoter entra em etapas: entendemos sua operação e propomos a solução." | 1. Entendemos · 2. Propomos |
 | **SOLUÇÃO** | 4 | Checklist de cadastros e integrações; `[confirmar]` Sankhya e WinThor | "Depois, estruturamos cadastros, integrações e responsabilidades, e acompanhamos a entrada em operação." | 3. Estruturamos · 4. Acompanhamos |
 | **BENEFÍCIO** | 5 | Equipe usando a plataforma no campo | "Uma entrada em operação mais organizada, com uma equipe que entende a rotina do campo." | Entrada organizada, suporte próximo |
-| Fecho | 6 | Logo | "TradePRO. Tecnologia para organizar a operação. Pessoas para fazer funcionar." | `[CTA]` |
+| Fecho | 6 | Logo | "TradePRO. Tecnologia para organizar a operação. Pessoas para fazer funcionar." | Falar com um especialista → seção Enterprise da LP Promoter |
 
 **Corte curto:** cenas 1, 3, 4 e 5.
 
@@ -94,17 +94,17 @@
 
 ---
 
-## Destino do clique (a definir)
+## Destino do clique: cada vídeo leva à LP do seu produto
 
-Com a página "Ver como funciona" fora da estrutura, o vídeo no frio precisa de um destino. Três opções, a decidir:
+| Vídeo | CTA | Destino |
+|---|---|---|
+| **Promoter** | Agendar uma demonstração | LP Promoter (versão Distribuidores) |
+| **Lite** | Ver como começar | LP Lite |
+| **Enterprise** | Falar com um especialista | Seção Enterprise da LP Promoter (o Enterprise não tem LP própria) |
 
-| Opção | Promoter | Lite | Enterprise |
-|---|---|---|---|
-| **Blog do mesmo tema** (recomendado: liga ao blog, ao público e ao WhatsApp) | Post do tema do vídeo | Post do tema do vídeo | Post sobre implantação |
-| **LP por produto** | LP Promoter | LP Lite | Seção Enterprise da LP Promoter |
-| **Só visualização** (sem clique, para formar público) | Sem CTA | Sem CTA | Sem CTA |
+**Quem assiste e não clica** entra no público do pixel (vídeo visto) e passa a receber conteúdo no Meta. **O remarketing** de quem já leu o blog ou viu o vídeo usa o mesmo CTA do produto.
 
-**Remarketing (quem já leu ou viu):** "Agendar uma demonstração" na LP Promoter, ou o WhatsApp via pré-formulário do RD. Lite: "Ver como começar". Enterprise: "Falar com um especialista".
+**Consequência para as LPs:** cada LP precisa abrir já na dor do vídeo que a alimenta. A LP Promoter começa pelo gancho de visibilidade e ruptura; a LP Lite, pelo "cresceu além do WhatsApp"; a seção Enterprise, pela implantação em etapas. Assim o anúncio e a página falam a mesma coisa.
 
 ## Checklist de aprovação (Manual de Copy, cap. 24)
 
@@ -114,5 +114,4 @@ A dor aparece primeiro, e não a empresa? A funcionalidade virou benefício? Ref
 
 1. **Telas reais** de cada `[TELA]`.
 2. **Integração Sankhya e WinThor:** o que está validado e pode ser dito.
-3. **Destino do clique** (acima).
-4. **Freelance, Sales e Shop:** entram nos vídeos, ou ficam fora?
+3. **Freelance, Sales e Shop:** entram nos vídeos, ou ficam fora?

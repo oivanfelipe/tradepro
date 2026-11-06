@@ -30,6 +30,7 @@ FASE 2 (depois de validar o Demand Gen)
 
 ### Jornada 2: Meta com vídeos novos
 - **Vídeos novos de produto** (P1, P2, L1 e demais), com telas reais, no topo para o ICP, sem Audience Network.
+- **Cada vídeo leva à LP do seu produto:** Promoter e Enterprise → LP Promoter (o Enterprise na seção própria); Lite → LP Lite.
 - Quem viu o vídeo entra no **público do pixel**.
 - O Meta entrega **conteúdos** (remarketing) a quem leu o blog ou viu o vídeo.
 
