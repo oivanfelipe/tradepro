@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mapa de Demanda TradePRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Open+Sans:wght@400;600&display=swap">
+<style>
+  /* Layout: uma tela. Três colunas (números, mapa, leitura) e uma faixa de cronograma embaixo.
+     Abaixo de 1100px a tela empilha e rola. */
+  :root {
+    --bg: #F4F6FC;
+    --surface: #FFFFFF;
+    --tint: #E9EEFB;
+    --line: #B9C4E6;
+    --fg: #0B1437;
+    --muted: #4A5584;
+    --accent: #2642B5;
+    --accent-ink: #FFFFFF;
+    --novo: #7A2BE0;
+    --novo-bg: #F0E6FF;
+    --novo-ink: #FFFFFF;
+    --warn: #9A4A00;
+    --warn-bg: #FFF1D6;
+    --font-d: 'Cairo', 'Segoe UI', system-ui, sans-serif;
+    --font-b: 'Open Sans', 'Segoe UI', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #080D2B; --surface: #111A47; --tint: #0E1639; --line: #33407F;
+      --fg: #E8ECFF; --muted: #A5B0E0; --accent: #7FA0FF; --accent-ink: #0A1030;
+      --novo: #C48BFF; --novo-bg: #2A1655; --novo-ink: #1A0B3A;
+      --warn: #F5B35A; --warn-bg: #3A2A0A;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #080D2B; --surface: #111A47; --tint: #0E1639; --line: #33407F;
+    --fg: #E8ECFF; --muted: #A5B0E0; --accent: #7FA0FF; --accent-ink: #0A1030;
+    --novo: #C48BFF; --novo-bg: #2A1655; --novo-ink: #1A0B3A;
+    --warn: #F5B35A; --warn-bg: #3A2A0A;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-b);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .app {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 14px max(18px, env(safe-area-inset-right, 0px)) 12px max(18px, env(safe-area-inset-left, 0px));
+  }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; }
+  h1 { font-family: var(--font-d); font-size: 24px; font-weight: 700; color: var(--accent); margin: 0; line-height: 1.1; }
+  .meta { color: var(--muted); font-size: 12px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 11.5px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 18px; height: 12px; border-radius: 3px; border: 2px solid var(--line); background: var(--surface); }
+  .sw.n { border-color: var(--novo); background: var(--novo-bg); }
+  .sw.d { border-style: dashed; }
+  .sw.l { border: 0; background: var(--accent); border-radius: 6px; }
+  .sw.w { border-color: var(--warn); background: var(--warn-bg); border-radius: 6px; }
+
+  .main { display: grid; grid-template-columns: 250px minmax(0, 1fr) 320px; gap: 12px; min-height: 0; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-height: 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .panel h2 { font-family: var(--font-d); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0; font-weight: 700; }
+  .mapbox { padding: 8px; }
+  .mapbox .fig { flex: 1; min-height: 0; overflow-x: auto; overflow-y: hidden; }
+  .mapbox svg { display: block; width: 100%; height: 100%; }
+
+  .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .kpi { background: var(--tint); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+  .kpi b { display: block; font-family: var(--font-d); font-size: 20px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .kpi span { display: block; font-size: 11px; color: var(--muted); }
+  .kpi.bad b { color: var(--warn); }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: right; padding: 4px 3px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; padding-left: 0; }
+  th { font-weight: 600; color: var(--muted); font-size: 11px; }
+  tr:last-child td { border-bottom: 0; }
+  .src { font-size: 10.5px; color: var(--muted); }
+  .list { margin: 0; padding-left: 16px; display: flex; flex-direction: column; gap: 5px; font-size: 12px; }
+  .box2 { background: var(--tint); border-radius: 8px; padding: 7px 10px; font-size: 11.5px; line-height: 1.4; display: flex; flex-direction: column; gap: 2px; }
+  .box2 b { font-family: var(--font-d); font-size: 13px; color: var(--accent); }
+  .grow { flex: 1; min-height: 0; overflow: auto; }
+
+  .ganttbox { padding: 8px 12px; gap: 4px; }
+  .ganttbox svg { display: block; width: 100%; height: auto; max-height: 31vh; }
+  .ganttbox .scrollx { overflow-x: auto; }
+  .ganttbox svg { min-width: 900px; }
+
+  /* SVG, estilizado pela página */
+  .t  { fill: var(--fg);    font-family: var(--font-b); font-size: 12px; font-weight: 600; }
+  .s  { fill: var(--muted); font-family: var(--font-b); font-size: 10.5px; }
+  .h  { fill: var(--muted); font-family: var(--font-d); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+  .lb { fill: var(--muted); font-family: var(--font-b); font-size: 10px; }
+  .lbn{ fill: var(--novo);  font-family: var(--font-b); font-size: 10px; font-weight: 600; }
+  .box  { fill: var(--surface); stroke: var(--line); stroke-width: 1.4; }
+  .cont { fill: var(--tint);    stroke: var(--line); stroke-width: 1.4; }
+  .nw   { fill: var(--novo-bg); stroke: var(--novo); stroke-width: 2.2; }
+  .dash { stroke-dasharray: 5 3; }
+  .ln   { fill: none; stroke: var(--muted); stroke-width: 1.4; }
+  .lnn  { fill: none; stroke: var(--novo);  stroke-width: 1.8; }
+  .mk   { fill: var(--muted); }
+  .mkn  { fill: var(--novo); }
+  .pill { fill: var(--novo); }
+  .pt   { fill: var(--novo-ink); font-family: var(--font-b); font-size: 8.5px; font-weight: 700; letter-spacing: 0.05em; }
+  .pl   { fill: var(--accent); }
+  .ptl  { fill: var(--accent-ink); font-family: var(--font-b); font-size: 8.5px; font-weight: 700; letter-spacing: 0.05em; }
+  .bd   { fill: var(--warn-bg); stroke: var(--warn); stroke-width: 1; }
+  .bdt  { fill: var(--warn); font-family: var(--font-b); font-size: 9px; font-weight: 700; }
+  .lbg  { fill: var(--surface); }
+  .bar  { fill: var(--tint); stroke: var(--accent); stroke-width: 1.4; }
+  .bart { fill: var(--surface); stroke: var(--muted); stroke-width: 1.4; stroke-dasharray: 5 3; }
+  .bt   { fill: var(--fg); font-family: var(--font-b); font-size: 11px; }
+  .rl   { fill: var(--fg); font-family: var(--font-d); font-size: 12.5px; font-weight: 700; }
+  .gate { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 4; }
+
+  @media (max-width: 1400px) {
+    .main { grid-template-columns: 220px minmax(0, 1fr) 280px; }
+    table { font-size: 11px; }
+    .list { font-size: 11.5px; gap: 4px; }
+    .box2 { font-size: 11px; }
+    .kpi b { font-size: 18px; }
+  }
+  @media (max-height: 800px) and (min-width: 1101px) {
+    .hide-short { display: none; }
+  }
+  @media (max-width: 1100px) {
+    .mapbox svg { min-width: 760px; height: auto; }
+    .app { height: auto; display: flex; flex-direction: column; }
+    .main { grid-template-columns: 1fr; }
+    .panel { overflow: visible; }
+    .mapbox .fig { min-height: 0; }
+    .ganttbox svg { max-height: none; }
+    .grow { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div>
+      <h1>Mapa de Demanda TradePRO</h1>
+      <div class="meta">Atualizado em 06/11/2026 · resultados de 01 a 29/10 (CRM) · plano, nada foi executado em conta</div>
+    </div>
+    <div class="legend" aria-hidden="true">
+      <span><i class="sw w"></i>número = ação no cronograma</span>
+      <span><i class="sw n"></i>novo</span>
+      <span><i class="sw l"></i>página a criar ou ajustar</span>
+      <span><i class="sw d"></i>orgânico ou sem anúncio</span>
+    </div>
+  </header>
+
+  <div class="main">
+    <!-- coluna esquerda: onde estamos -->
+    <section class="panel" aria-label="Onde estamos">
+      <h2>Onde estamos</h2>
+      <div class="kpis">
+        <div class="kpi"><b>R$ 2.805</b><span>investido · ritmo 100%</span></div>
+        <div class="kpi bad"><b>10</b><span>leads · meta 23</span></div>
+        <div class="kpi bad"><b>4</b><span>MQL · meta 8,2</span></div>
+        <div class="kpi bad"><b>0</b><span>SQL · meta 5,3</span></div>
+        <div class="kpi bad"><b>R$ 281</b><span>por lead · meta R$ 120</span></div>
+        <div class="kpi bad"><b>R$ 701</b><span>por MQL</span></div>
+      </div>
+      <table>
+        <thead><tr><th>Canal</th><th>Invest.</th><th>Leads</th><th>MQL</th><th>CPL</th></tr></thead>
+        <tbody>
+          <tr><td>Google</td><td>R$ 1.846</td><td>7</td><td>4</td><td>R$ 264</td></tr>
+          <tr><td>Meta</td><td>R$ 959</td><td>2</td><td>0</td><td>R$ 480</td></tr>
+        </tbody>
+      </table>
+      <div class="src">Fonte: painel V4 com leads, MQL e SQL do CRM do cliente, 01 a 29/10. A meta é o cenário provável do painel.</div>
+    </section>
+
+    <!-- centro: mapa -->
+    <section class="panel mapbox" aria-label="Mapa da estrutura">
+      <div class="fig">
+        <svg viewBox="0 0 900 505" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Fluxo em cinco etapas, do anúncio à implantação. Meta, orgânico e Google Demand Gen levam à página do ebook ou ao blog post. O download entra em uma trilha por perfil: a trilha Lite leva à página Lite e à venda Lite; a trilha Promoter leva ao comercial, ao remarketing e à página Promoter. O remarketing passa pela página Ver como funciona. A busca no Google vai direto à página Promoter. O comercial e a página Promoter levam ao SQL, à demonstração e à implantação.">
+          <defs>
+            <marker id="ah"  viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="mk"/></marker>
+            <marker id="ahn" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="mkn"/></marker>
+          </defs>
+
+          <text class="h" x="74"  y="20" text-anchor="middle">ATRAIR</text>
+          <text class="h" x="263" y="20" text-anchor="middle">EDUCAR E CAPTAR</text>
+          <text class="h" x="452" y="20" text-anchor="middle">NUTRIR</text>
+          <text class="h" x="641" y="20" text-anchor="middle">CONVERTER</text>
+          <text class="h" x="830" y="20" text-anchor="middle">FECHAR</text>
+
+          <!-- coluna 1 -->
+          <rect class="box" x="4" y="44" width="140" height="50" rx="7"/>
+          <text class="t" x="12" y="64">Meta Ads (topo)</text>
+          <text class="s" x="12" y="78">vídeos P1, P2, P6</text>
+          <text class="s" x="12" y="90">e anúncio do ebook</text>
+
+          <rect class="box dash" x="4" y="112" width="140" height="50" rx="7"/>
+          <text class="t" x="12" y="132">LinkedIn e IG</text>
+          <text class="s" x="12" y="146">posts e carrosséis</text>
+          <text class="s" x="12" y="158">(orgânico)</text>
+
+          <rect class="nw" x="4" y="198" width="140" height="50" rx="7"/>
+          <text class="t" x="12" y="218">Google Demand Gen</text>
+          <text class="s" x="12" y="232">anúncio que leva</text>
+          <text class="s" x="12" y="244">ao blog post</text>
+          <rect class="pill" x="100" y="190" width="40" height="15" rx="7"/>
+          <text class="pt" x="120" y="200.5" text-anchor="middle">NOVO</text>
+
+          <rect class="box dash" x="4" y="440" width="140" height="50" rx="7"/>
+          <text class="t" x="12" y="460">Quem já busca</text>
+          <text class="s" x="12" y="474">demanda que já existe</text>
+
+          <!-- coluna 2 -->
+          <rect class="box" x="193" y="44" width="140" height="50" rx="7"/>
+          <text class="t" x="201" y="64">LP do ebook</text>
+          <text class="s" x="201" y="78">formulário do RD</text>
+          <text class="s" x="201" y="90">4 campos + segmento</text>
+          <rect class="pl" x="299" y="36" width="28" height="15" rx="7"/>
+          <text class="ptl" x="313" y="46.5" text-anchor="middle">LP</text>
+
+          <rect class="nw" x="193" y="198" width="140" height="50" rx="7"/>
+          <text class="t" x="201" y="218">Blog post</text>
+          <text class="s" x="201" y="232">no site, com CTA</text>
+          <text class="s" x="201" y="244">para o ebook</text>
+          <rect class="pill" x="289" y="190" width="40" height="15" rx="7"/>
+          <text class="pt" x="309" y="200.5" text-anchor="middle">NOVO</text>
+
+          <rect class="box" x="193" y="440" width="140" height="50" rx="7"/>
+          <text class="t" x="201" y="460">Google Search</text>
+          <text class="s" x="201" y="474">marca, distribuidores</text>
+          <text class="s" x="201" y="486">e dores do campo</text>
+
+          <!-- coluna 3 -->
+          <rect class="cont" x="382" y="36" width="140" height="226" rx="9"/>
+          <text class="s" x="390" y="52">Pós-download, por perfil</text>
+          <rect class="box" x="390" y="58" width="124" height="40" rx="6"/>
+          <text class="t" x="398" y="75">Trilha Lite</text>
+          <text class="s" x="398" y="90">até ~10 pessoas</text>
+          <rect class="box" x="390" y="108" width="124" height="88" rx="6"/>
+          <text class="t" x="398" y="126">Trilha Promoter</text>
+          <text class="s" x="398" y="141">8 peças, D0 a D15</text>
+          <text class="s" x="398" y="154">contato do comercial</text>
+          <rect class="box" x="390" y="206" width="124" height="40" rx="6"/>
+          <text class="t" x="398" y="223">Nutrição leve</text>
+          <text class="s" x="398" y="238">varejo ou outro</text>
+          <text class="s" x="382" y="278">Download não é MQL.</text>
+          <text class="s" x="382" y="291">Perfil + interesse = MQL.</text>
+
+          <!-- coluna 4 -->
+          <rect class="box" x="571" y="53" width="140" height="50" rx="7"/>
+          <text class="t" x="579" y="73">LP Lite</text>
+          <text class="s" x="579" y="87">sem preço, form curto</text>
+          <text class="s" x="579" y="99">Ver como começar</text>
+          <rect class="pl" x="677" y="45" width="28" height="15" rx="7"/>
+          <text class="ptl" x="691" y="55.5" text-anchor="middle">LP</text>
+
+          <rect class="box" x="571" y="118" width="140" height="50" rx="7"/>
+          <text class="t" x="579" y="138">Contato comercial</text>
+          <text class="s" x="579" y="152">pergunta de diagnóstico</text>
+          <text class="s" x="579" y="164">no WhatsApp</text>
+
+          <rect class="box" x="571" y="200" width="140" height="50" rx="7"/>
+          <text class="t" x="579" y="220">Remarketing Meta</text>
+          <text class="s" x="579" y="234">prova social e demo</text>
+          <text class="s" x="579" y="246">para quem baixou</text>
+
+          <rect class="box" x="571" y="275" width="140" height="50" rx="7"/>
+          <text class="t" x="579" y="295">Ver como funciona</text>
+          <text class="s" x="579" y="309">vídeo e 3 casos</text>
+          <text class="s" x="579" y="321">(intermediária)</text>
+          <rect class="pl" x="677" y="267" width="28" height="15" rx="7"/>
+          <text class="ptl" x="691" y="277.5" text-anchor="middle">LP</text>
+
+          <rect class="box" x="571" y="350" width="140" height="50" rx="7"/>
+          <text class="t" x="579" y="370">LP Promoter</text>
+          <text class="s" x="579" y="384">versão Distribuidores</text>
+          <text class="s" x="579" y="396">+ seção Enterprise</text>
+          <rect class="pl" x="677" y="342" width="28" height="15" rx="7"/>
+          <text class="ptl" x="691" y="352.5" text-anchor="middle">LP</text>
+
+          <!-- coluna 5 -->
+          <rect class="box" x="760" y="53" width="140" height="50" rx="7"/>
+          <text class="t" x="768" y="73">Venda Lite</text>
+          <text class="s" x="768" y="87">low-touch, 5 etapas</text>
+          <text class="s" x="768" y="99">até o fechamento</text>
+
+          <rect class="box" x="760" y="237" width="140" height="50" rx="7"/>
+          <text class="t" x="768" y="257">Discovery e SQL</text>
+          <text class="s" x="768" y="271">fit, dor e próximo</text>
+          <text class="s" x="768" y="283">passo (comercial)</text>
+
+          <rect class="box" x="760" y="312" width="140" height="50" rx="7"/>
+          <text class="t" x="768" y="332">Demonstração</text>
+          <text class="s" x="768" y="346">e proposta</text>
+
+          <rect class="box" x="760" y="387" width="140" height="50" rx="7"/>
+          <text class="t" x="768" y="407">Implantação</text>
+          <text class="s" x="768" y="421">e adoção</text>
+
+          <!-- setas -->
+          <line class="ln" x1="144" y1="69" x2="191" y2="69" marker-end="url(#ah)"/>
+          <text class="lb" x="168" y="62" text-anchor="middle">clique</text>
+
+          <polyline class="ln dash" points="144,137 168,137 168,86 191,86" marker-end="url(#ah)"/>
+          <text class="lb" x="172" y="120" text-anchor="start">link</text>
+
+          <line class="lnn" x1="144" y1="223" x2="191" y2="223" marker-end="url(#ahn)"/>
+          <text class="lbn" x="168" y="216" text-anchor="middle">clique</text>
+
+          <line class="lnn" x1="263" y1="196" x2="263" y2="96" marker-end="url(#ahn)"/>
+          <text class="lbn" x="269" y="150" text-anchor="start">CTA do ebook</text>
+
+          <line class="ln" x1="144" y1="465" x2="191" y2="465" marker-end="url(#ah)"/>
+          <text class="lb" x="168" y="458" text-anchor="middle">busca</text>
+
+          <line class="ln" x1="333" y1="69" x2="380" y2="69" marker-end="url(#ah)"/>
+          <text class="lb" x="356" y="62" text-anchor="middle">baixa</text>
+
+          <line class="ln" x1="514" y1="78" x2="569" y2="78" marker-end="url(#ah)"/>
+          <text class="lb" x="546" y="71" text-anchor="middle">CTA Lite</text>
+
+          <line class="ln" x1="514" y1="143" x2="569" y2="143" marker-end="url(#ah)"/>
+          <text class="lb" x="546" y="136" text-anchor="middle">contato</text>
+
+          <polyline class="ln" points="514,165 548,165 548,225 569,225" marker-end="url(#ah)"/>
+          <rect class="lbg" x="534" y="188" width="28" height="13" rx="3"/>
+          <text class="lb" x="548" y="198" text-anchor="middle">lista</text>
+
+          <polyline class="ln" points="514,178 534,178 534,375 569,375" marker-end="url(#ah)"/>
+          <rect class="lbg" x="515" y="324" width="38" height="13" rx="3"/>
+          <text class="lb" x="534" y="334" text-anchor="middle">convite</text>
+
+          <line class="ln" x1="641" y1="252" x2="641" y2="273" marker-end="url(#ah)"/>
+          <text class="lb" x="647" y="266" text-anchor="start">clique</text>
+
+          <line class="ln" x1="641" y1="327" x2="641" y2="348" marker-end="url(#ah)"/>
+          <text class="lb" x="647" y="341" text-anchor="start">demonstração</text>
+
+          <polyline class="ln" points="333,465 641,465 641,402" marker-end="url(#ah)"/>
+          <text class="lb" x="487" y="457" text-anchor="middle">busca ativa vai direto à LP Promoter</text>
+
+          <line class="ln" x1="711" y1="78" x2="758" y2="78" marker-end="url(#ah)"/>
+          <text class="lb" x="735" y="71" text-anchor="middle">demo</text>
+
+          <polyline class="ln" points="711,143 735,143 735,262 758,262" marker-end="url(#ah)"/>
+          <polyline class="ln" points="711,375 735,375 735,262"/>
+
+          <line class="ln" x1="830" y1="289" x2="830" y2="310" marker-end="url(#ah)"/>
+          <line class="ln" x1="830" y1="364" x2="830" y2="385" marker-end="url(#ah)"/>
+
+          <!-- selos de ação -->
+          <rect class="bd" x="10"  y="36"  width="30" height="15" rx="7"/><text class="bdt" x="25"  y="46.5" text-anchor="middle">3·15</text>
+          <rect class="bd" x="10"  y="190" width="22" height="15" rx="7"/><text class="bdt" x="21"  y="200.5" text-anchor="middle">17</text>
+          <rect class="bd" x="199" y="36"  width="40" height="15" rx="7"/><text class="bdt" x="219" y="46.5" text-anchor="middle">2·5·10</text>
+          <rect class="bd" x="199" y="190" width="30" height="15" rx="7"/><text class="bdt" x="214" y="200.5" text-anchor="middle">9·11</text>
+          <rect class="bd" x="199" y="432" width="30" height="15" rx="7"/><text class="bdt" x="214" y="442.5" text-anchor="middle">4·16</text>
+          <rect class="bd" x="388" y="22" width="22" height="15" rx="7"/><text class="bdt" x="399" y="32.5" text-anchor="middle">13</text>
+          <rect class="bd" x="577" y="45"  width="20" height="15" rx="7"/><text class="bdt" x="587" y="55.5" text-anchor="middle">8</text>
+          <rect class="bd" x="577" y="110" width="30" height="15" rx="7"/><text class="bdt" x="592" y="120.5" text-anchor="middle">1·18</text>
+          <rect class="bd" x="577" y="267" width="46" height="15" rx="7"/><text class="bdt" x="600" y="277.5" text-anchor="middle">6·12·14</text>
+          <rect class="bd" x="577" y="342" width="26" height="15" rx="7"/><text class="bdt" x="590" y="352.5" text-anchor="middle">1·7</text>
+          <rect class="bd" x="766" y="229" width="22" height="15" rx="7"/><text class="bdt" x="777" y="239.5" text-anchor="middle">19</text>
+        </svg>
+      </div>
+    </section>
+
+    <!-- coluna direita: leitura -->
+    <section class="panel" aria-label="Leitura dos dados">
+      <h2>O que os dados dizem</h2>
+      <div class="grow">
+        <ul class="list">
+          <li>O Google registra 3 conversões e o CRM atribui 7 leads ao Google. <b>O rastreio subconta.</b></li>
+          <li>No Meta, 61% dos cliques vieram do Audience Network, com 0 leads, e 65% do gasto foi em 55+.</li>
+          <li><b>SQL é 0 em 29 dias.</b> A qualificação do comercial é o maior vazamento depois do lead.</li>
+          <li>Hoje a mídia gera cerca de 1 cliente a cada 2 a 3 meses (hipótese: 5% a 12% de MQL→cliente).</li>
+        </ul>
+        <div class="box2 hide-short" style="margin-top:8px">
+          <b>Blog post em Demand Gen</b>
+          <span>Educa o público frio e leva ao ebook. Teste no mês 2, ~R$ 20 por dia. Medir: custo por visita qualificada, downloads de ICP e busca de marca.</span>
+        </div>
+        <div class="box2" style="margin-top:8px">
+          <b>Pendências</b>
+          <span>O que está errado na saída do WhatsApp? O evento do formulário do RD chega ao GTM e ao GA4? Faltam telas reais, o que está validado em Sankhya e WinThor e a autorização dos depoimentos.</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- cronograma -->
+  <section class="panel ganttbox" aria-label="Ações no tempo">
+    <div class="scrollx">
+      <svg viewBox="0 0 1260 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cronograma das 19 ações em seis frentes e quatro períodos: semanas 1 e 2, semanas 3 e 4, mês 2 e mês 3. Portão 1, no fim da semana 2: rastreio validado. Portão 2, no fim da semana 4: páginas e ebook 1 no ar. Portão 3, no dia 60: decide a verba.">
+        <text class="h" x="322"  y="18" text-anchor="middle">SEMANAS 1–2</text>
+        <text class="h" x="587"  y="18" text-anchor="middle">SEMANAS 3–4</text>
+        <text class="h" x="852"  y="18" text-anchor="middle">MÊS 2</text>
+        <text class="h" x="1117" y="18" text-anchor="middle">MÊS 3</text>
+
+        <line class="gate" x1="455" y1="26" x2="455" y2="272"/>
+        <line class="gate" x1="720" y1="26" x2="720" y2="272"/>
+        <line class="gate" x1="985" y1="26" x2="985" y2="272"/>
+
+        <text class="rl" x="10" y="54">Medição · V4</text>
+        <text class="rl" x="10" y="94">Páginas · V4</text>
+        <text class="rl" x="10" y="134">Conteúdo · V4</text>
+        <text class="rl" x="10" y="174">Meta · V4</text>
+        <text class="rl" x="10" y="214">Google · V4</text>
+        <text class="rl" x="10" y="254">Comercial · TradePRO</text>
+
+        <!-- Medição -->
+        <rect class="bar" x="198" y="34" width="249" height="32" rx="6"/><text class="bt" x="207" y="54">1 WhatsApp · 2 download RD · 3 UTM</text>
+        <rect class="bar" x="463" y="34" width="249" height="32" rx="6"/><text class="bt" x="472" y="54">4 MQL do RD no Google Ads</text>
+        <!-- Páginas -->
+        <rect class="bar" x="198" y="74" width="249" height="32" rx="6"/><text class="bt" x="207" y="94">7 LP Promoter (Distribuidores)</text>
+        <rect class="bar" x="463" y="74" width="249" height="32" rx="6"/><text class="bt" x="472" y="94">5 LP ebook · 6 Ver como funciona · 8 Lite</text>
+        <rect class="bar" x="728" y="74" width="249" height="32" rx="6"/><text class="bt" x="737" y="94">9 Blog: CTA e visita qualificada</text>
+        <!-- Conteúdo -->
+        <rect class="bar" x="198" y="114" width="249" height="32" rx="6"/><text class="bt" x="207" y="134">10 ebooks 1 e 2 · 14 depoimentos</text>
+        <rect class="bar" x="463" y="114" width="249" height="32" rx="6"/><text class="bt" x="472" y="134">12 vídeos P1, P2, L1</text>
+        <rect class="bar" x="728" y="114" width="249" height="32" rx="6"/><text class="bt" x="737" y="134">11 posts do blog · 13 pós-download</text>
+        <!-- Meta -->
+        <rect class="bar" x="198" y="154" width="249" height="32" rx="6"/><text class="bt" x="207" y="174">15 higiene (sem Audience Network)</text>
+        <rect class="bar" x="728" y="154" width="249" height="32" rx="6"/><text class="bt" x="737" y="174">15 nova estrutura (topo, RMK, oferta)</text>
+        <rect class="bart" x="993" y="154" width="249" height="32" rx="6"/><text class="bt" x="1002" y="174">decisão pelo custo por MQL</text>
+        <!-- Google -->
+        <rect class="bar" x="198" y="194" width="249" height="32" rx="6"/><text class="bt" x="207" y="214">16 negativas, Distribuidores, Lite</text>
+        <rect class="bar" x="728" y="194" width="249" height="32" rx="6"/><text class="bt" x="737" y="214">17 teste Demand Gen (~R$ 20/dia)</text>
+        <rect class="bart" x="993" y="194" width="249" height="32" rx="6"/><text class="bt" x="1002" y="214">decisão: custo por MQL e downloads</text>
+        <!-- Comercial -->
+        <rect class="bar" x="198" y="234" width="249" height="32" rx="6"/><text class="bt" x="207" y="254">18 WhatsApp no CRM com próxima ação</text>
+        <rect class="bar" x="463" y="234" width="249" height="32" rx="6"/><text class="bt" x="472" y="254">19 MQL e SQL no RD CRM</text>
+
+        <text class="lb" x="455" y="290" text-anchor="middle">Portão 1: rastreio validado</text>
+        <text class="lb" x="720" y="290" text-anchor="middle">Portão 2: páginas e ebook 1 no ar</text>
+        <text class="lb" x="985" y="290" text-anchor="middle">Portão 3: dia 60 decide a verba</text>
+      </svg>
+    </div>
+    <div class="src">V4 executa. A TradePRO valida conteúdo e páginas, fornece as telas, autoriza os depoimentos e cuida do comercial (18 e 19). Barras tracejadas são decisões. Fontes: painel V4 (CRM), Windsor (Meta Ads), prints do Google Ads. Hipóteses estão marcadas.</div>
+  </section>
+</div>
+</body>
+</html>
