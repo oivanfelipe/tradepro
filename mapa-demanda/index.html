@@ -124,6 +124,8 @@
   .bart { fill: var(--surface); stroke: var(--muted); stroke-width: 1.4; stroke-dasharray: 5 3; }
   .bt   { fill: var(--fg); font-family: var(--font-b); font-size: 10.5px; }
   .rl   { fill: var(--fg); font-family: var(--font-d); font-size: 12.5px; font-weight: 700; }
+  .lane { fill: var(--tint); stroke: var(--line); stroke-width: 1; opacity: 0.55; }
+  .lh   { fill: var(--muted); font-family: var(--font-d); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; }
   .gate { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 4; }
 
   @media (max-width: 1400px) {
@@ -164,7 +166,7 @@
       <span><i class="sw w"></i>número = ação no cronograma</span>
       <span><i class="sw n"></i>novo</span>
       <span><i class="sw l"></i>página a criar ou ajustar</span>
-      <span><i class="sw d"></i>orgânico ou sem anúncio</span>
+      <span><i class="sw d"></i>orgânico, a confirmar ou fase 2</span>
     </div>
   </header>
 
@@ -173,11 +175,11 @@
     <section class="panel" aria-label="Premissas da estrutura">
       <h2>Premissas</h2>
       <ul class="list">
-        <li>O <b>blog vem primeiro</b> e valida o tema. O ebook corre em paralelo.</li>
-        <li>Posts <b>estratégicos</b>, com CTA para o <b>WhatsApp</b>, passando pelo <b>pré-formulário do RD</b>.</li>
-        <li>O blog forma o <b>público do pixel</b>, que alimenta o remarketing no Meta.</li>
-        <li>LinkedIn orgânico e Demand Gen levam ao blog. O Meta cria demanda com vídeos de produto.</li>
-        <li>O ebook é o conteúdo-gatilho: leva o público quente ao CRM e barateia o CPL.</li>
+        <li>Três jornadas rodam para <b>formar público qualificado</b>: Search + PMax para LPs por produto, Meta com vídeos novos e Demand Gen para o blog.</li>
+        <li>O blog é <b>estratégico</b>, com CTA para o <b>WhatsApp</b> via pré-formulário do RD.</li>
+        <li>Quem leu o blog <b>já recebe conteúdo no Meta</b>.</li>
+        <li>LinkedIn orgânico é um <b>teste do blog post</b>.</li>
+        <li>O <b>ebook é outra estratégia</b> (geração de leads), na fase 2, depois de validar o Demand Gen: ebook, campanha de leads e régua de CRM.</li>
         <li>Download não é MQL.</li>
       </ul>
     </section>
@@ -185,213 +187,159 @@
     <!-- centro: mapa -->
     <section class="panel mapbox" aria-label="Mapa da estrutura">
       <div class="fig">
-        <svg viewBox="0 0 900 505" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Fluxo em cinco etapas, do anúncio à implantação. LinkedIn orgânico e Google Demand Gen levam ao blog post. O blog leva ao pré-formulário do RD e ao WhatsApp do comercial, e forma o público do pixel, que alimenta o remarketing no Meta. O Meta com vídeos de produto também leva ao ebook. O download entra em uma trilha por perfil: a trilha Lite leva à página Lite e à venda Lite; a trilha Promoter leva ao comercial, ao remarketing e à página Promoter. O remarketing passa pela página Ver como funciona. A busca no Google vai direto à página Promoter. O comercial e a página Promoter levam ao SQL, à demonstração e à implantação.">
-          <defs>
-            <marker id="ah"  viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="mk"/></marker>
-            <marker id="ahn" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="mkn"/></marker>
-          </defs>
-
-          <text class="h" x="74"  y="20" text-anchor="middle">ATRAIR</text>
-          <text class="h" x="263" y="20" text-anchor="middle">EDUCAR E CAPTAR</text>
-          <text class="h" x="452" y="20" text-anchor="middle">NUTRIR</text>
-          <text class="h" x="641" y="20" text-anchor="middle">CONVERTER</text>
-          <text class="h" x="830" y="20" text-anchor="middle">FECHAR</text>
-
-          <!-- coluna 1 -->
-          <rect class="box" x="4" y="44" width="140" height="50" rx="7"/>
-          <text class="t" x="12" y="64">Meta: produto</text>
-          <text class="s" x="12" y="78">vídeos P1, P2, P6 no topo,</text>
-          <text class="s" x="12" y="90">sem Audience Network</text>
-
-          <rect class="box dash" x="4" y="112" width="140" height="50" rx="7"/>
-          <text class="t" x="12" y="132">LinkedIn orgânico</text>
-          <text class="s" x="12" y="146">conteúdo rico que</text>
-          <text class="s" x="12" y="158">leva ao blog</text>
-
-          <rect class="nw" x="4" y="198" width="140" height="50" rx="7"/>
-          <text class="t" x="12" y="218">Google Demand Gen</text>
-          <text class="s" x="12" y="232">verba mínima da</text>
-          <text class="s" x="12" y="244">plataforma, leva ao blog</text>
-          <rect class="pill" x="100" y="190" width="40" height="15" rx="7"/>
-          <text class="pt" x="120" y="200.5" text-anchor="middle">NOVO</text>
-
-          <rect class="box dash" x="4" y="440" width="140" height="50" rx="7"/>
-          <text class="t" x="12" y="460">Quem já busca</text>
-          <text class="s" x="12" y="474">demanda que já existe</text>
-
-          <!-- coluna 2 -->
-          <rect class="box" x="193" y="44" width="140" height="50" rx="7"/>
-          <text class="t" x="201" y="64">LP do ebook</text>
-          <text class="s" x="201" y="78">fase 2, depois do blog</text>
-          <text class="s" x="201" y="90">formulário do RD</text>
-          <rect class="pl" x="299" y="36" width="28" height="15" rx="7"/>
-          <text class="ptl" x="313" y="46.5" text-anchor="middle">LP</text>
-
-          <rect class="nw" x="193" y="198" width="140" height="50" rx="7"/>
-          <text class="t" x="201" y="218">Blog post</text>
-          <text class="s" x="201" y="232">posts estratégicos, no site</text>
-          <text class="s" x="201" y="244">CTA: pré-form + WhatsApp</text>
-          <rect class="pill" x="279" y="190" width="50" height="15" rx="7"/>
-          <text class="pt" x="304" y="200.5" text-anchor="middle">FASE 1</text>
-
-          <rect class="nw" x="193" y="300" width="140" height="50" rx="7"/>
-          <text class="t" x="201" y="320">Público do pixel</text>
-          <text class="s" x="201" y="334">leu o post ou viu o vídeo,</text>
-          <text class="s" x="201" y="346">por tema</text>
-          <rect class="pill" x="289" y="292" width="40" height="15" rx="7"/>
-          <text class="pt" x="309" y="302.5" text-anchor="middle">NOVO</text>
-
-          <rect class="box" x="193" y="440" width="140" height="50" rx="7"/>
-          <text class="t" x="201" y="460">Google Search</text>
-          <text class="s" x="201" y="474">marca, distribuidores</text>
-          <text class="s" x="201" y="486">e dores do campo</text>
-
-          <!-- coluna 3 -->
-          <rect class="cont" x="382" y="36" width="140" height="226" rx="9"/>
-          <text class="s" x="390" y="52">Fase 2: pós-download</text>
-          <rect class="box" x="390" y="58" width="124" height="40" rx="6"/>
-          <text class="t" x="398" y="75">Trilha Lite</text>
-          <text class="s" x="398" y="90">até ~10 pessoas</text>
-          <rect class="box" x="390" y="108" width="124" height="88" rx="6"/>
-          <text class="t" x="398" y="126">Trilha Promoter</text>
-          <text class="s" x="398" y="141">8 peças, D0 a D15</text>
-          <text class="s" x="398" y="154">contato do comercial</text>
-          <rect class="box" x="390" y="206" width="124" height="40" rx="6"/>
-          <text class="t" x="398" y="223">Nutrição leve</text>
-          <text class="s" x="398" y="238">varejo ou outro</text>
-          <rect class="nw" x="382" y="268" width="140" height="46" rx="7"/>
-          <text class="t" x="390" y="284">Pré-form RD</text>
-          <text class="s" x="390" y="298">WhatsApp do comercial,</text>
-          <text class="s" x="390" y="309">segue o fluxo comercial</text>
-          <rect class="pill" x="478" y="260" width="40" height="15" rx="7"/>
-          <text class="pt" x="498" y="270.5" text-anchor="middle">NOVO</text>
-          <text class="s" x="382" y="346">Download não é MQL.</text>
-          <text class="s" x="382" y="359">Perfil + interesse = MQL.</text>
-
-          <!-- coluna 4 -->
-          <rect class="box" x="571" y="53" width="140" height="50" rx="7"/>
-          <text class="t" x="579" y="73">LP Lite</text>
-          <text class="s" x="579" y="87">sem preço, form curto</text>
-          <text class="s" x="579" y="99">Ver como começar</text>
-          <rect class="pl" x="677" y="45" width="28" height="15" rx="7"/>
-          <text class="ptl" x="691" y="55.5" text-anchor="middle">LP</text>
-
-          <rect class="box" x="571" y="118" width="140" height="50" rx="7"/>
-          <text class="t" x="579" y="138">Contato comercial</text>
-          <text class="s" x="579" y="152">pergunta de diagnóstico</text>
-          <text class="s" x="579" y="164">no WhatsApp</text>
-
-          <rect class="box" x="571" y="200" width="140" height="50" rx="7"/>
-          <text class="t" x="579" y="220">Remarketing Meta</text>
-          <text class="s" x="579" y="234">público do blog e vídeo</text>
-          <text class="s" x="579" y="246">leva ao ebook e à demo</text>
-
-          <rect class="box" x="571" y="275" width="140" height="50" rx="7"/>
-          <text class="t" x="579" y="295">Ver como funciona</text>
-          <text class="s" x="579" y="309">vídeo e 3 casos</text>
-          <text class="s" x="579" y="321">(intermediária)</text>
-          <rect class="pl" x="677" y="267" width="28" height="15" rx="7"/>
-          <text class="ptl" x="691" y="277.5" text-anchor="middle">LP</text>
-
-          <rect class="box" x="571" y="350" width="140" height="50" rx="7"/>
-          <text class="t" x="579" y="370">LP Promoter</text>
-          <text class="s" x="579" y="384">versão Distribuidores</text>
-          <text class="s" x="579" y="396">+ seção Enterprise</text>
-          <rect class="pl" x="677" y="342" width="28" height="15" rx="7"/>
-          <text class="ptl" x="691" y="352.5" text-anchor="middle">LP</text>
-
-          <!-- coluna 5 -->
-          <rect class="box" x="760" y="53" width="140" height="50" rx="7"/>
-          <text class="t" x="768" y="73">Venda Lite</text>
-          <text class="s" x="768" y="87">low-touch, 5 etapas</text>
-          <text class="s" x="768" y="99">até o fechamento</text>
-
-          <rect class="box" x="760" y="237" width="140" height="50" rx="7"/>
-          <text class="t" x="768" y="257">Discovery e SQL</text>
-          <text class="s" x="768" y="271">fit, dor e próximo</text>
-          <text class="s" x="768" y="283">passo (comercial)</text>
-
-          <rect class="box" x="760" y="312" width="140" height="50" rx="7"/>
-          <text class="t" x="768" y="332">Demonstração</text>
-          <text class="s" x="768" y="346">e proposta</text>
-
-          <rect class="box" x="760" y="387" width="140" height="50" rx="7"/>
-          <text class="t" x="768" y="407">Implantação</text>
-          <text class="s" x="768" y="421">e adoção</text>
-
-          <!-- setas -->
-          <line class="ln" x1="144" y1="69" x2="191" y2="69" marker-end="url(#ah)"/>
-          <text class="lb" x="168" y="62" text-anchor="middle">ebook</text>
-
-          <line class="lnn" x1="263" y1="250" x2="263" y2="298" marker-end="url(#ahn)"/>
-          <text class="lbn" x="269" y="278" text-anchor="start">visita qualificada</text>
-
-          <polyline class="ln dash" points="144,137 168,137 168,208 191,208" marker-end="url(#ah)"/>
-          <text class="lb" x="172" y="172" text-anchor="start">link</text>
-
-          <line class="lnn" x1="144" y1="238" x2="191" y2="238" marker-end="url(#ahn)"/>
-          <text class="lbn" x="168" y="231" text-anchor="middle">clique</text>
-
-          <line class="ln dash" x1="263" y1="196" x2="263" y2="96" marker-end="url(#ah)"/>
-          <text class="lb" x="269" y="150" text-anchor="start">ebook, depois</text>
-
-          <polyline class="lnn" points="333,215 357,215 357,291 380,291" marker-end="url(#ahn)"/>
-          <rect class="lbg" x="343" y="244" width="28" height="13" rx="3"/>
-          <text class="lbn" x="357" y="254" text-anchor="middle">CTA</text>
-
-          <line class="ln" x1="144" y1="465" x2="191" y2="465" marker-end="url(#ah)"/>
-          <text class="lb" x="168" y="458" text-anchor="middle">busca</text>
-
-          <line class="ln" x1="333" y1="69" x2="380" y2="69" marker-end="url(#ah)"/>
-          <text class="lb" x="356" y="62" text-anchor="middle">baixa</text>
-
-          <line class="ln" x1="514" y1="78" x2="569" y2="78" marker-end="url(#ah)"/>
-          <text class="lb" x="546" y="71" text-anchor="middle">CTA Lite</text>
-
-          <line class="ln" x1="514" y1="143" x2="569" y2="143" marker-end="url(#ah)"/>
-          <text class="lb" x="546" y="136" text-anchor="middle">contato</text>
-
-          <polyline class="lnn" points="333,325 548,325 548,225 569,225" marker-end="url(#ahn)"/>
-          <rect class="lbg" x="536" y="280" width="24" height="13" rx="3"/>
-          <text class="lbn" x="548" y="290" text-anchor="middle">lista</text>
-
-          <polyline class="ln" points="514,178 534,178 534,375 569,375" marker-end="url(#ah)"/>
-          <rect class="lbg" x="515" y="338" width="38" height="13" rx="3"/>
-          <text class="lb" x="534" y="348" text-anchor="middle">convite</text>
-
-          <line class="ln" x1="641" y1="252" x2="641" y2="273" marker-end="url(#ah)"/>
-          <text class="lb" x="647" y="266" text-anchor="start">clique</text>
-
-          <line class="ln" x1="641" y1="327" x2="641" y2="348" marker-end="url(#ah)"/>
-          <text class="lb" x="647" y="341" text-anchor="start">demonstração</text>
-
-          <polyline class="ln" points="333,465 641,465 641,402" marker-end="url(#ah)"/>
-          <text class="lb" x="487" y="457" text-anchor="middle">busca ativa vai direto à LP Promoter</text>
-
-          <line class="ln" x1="711" y1="78" x2="758" y2="78" marker-end="url(#ah)"/>
-          <text class="lb" x="735" y="71" text-anchor="middle">demo</text>
-
-          <polyline class="ln" points="711,143 735,143 735,262 758,262" marker-end="url(#ah)"/>
-          <polyline class="ln" points="711,375 735,375 735,262"/>
-
-          <line class="ln" x1="830" y1="289" x2="830" y2="310" marker-end="url(#ah)"/>
-          <line class="ln" x1="830" y1="364" x2="830" y2="385" marker-end="url(#ah)"/>
-
-          <!-- selos de ação -->
-          <rect class="bd" x="10"  y="36"  width="30" height="15" rx="7"/><text class="bdt" x="25"  y="46.5" text-anchor="middle">3·15</text>
-          <rect class="bd" x="10"  y="104" width="22" height="15" rx="7"/><text class="bdt" x="21"  y="114.5" text-anchor="middle">20</text>
-          <rect class="bd" x="10"  y="190" width="22" height="15" rx="7"/><text class="bdt" x="21"  y="200.5" text-anchor="middle">17</text>
-          <rect class="bd" x="199" y="36"  width="40" height="15" rx="7"/><text class="bdt" x="219" y="46.5" text-anchor="middle">2·5·10</text>
-          <rect class="bd" x="199" y="190" width="30" height="15" rx="7"/><text class="bdt" x="214" y="200.5" text-anchor="middle">9·11</text>
-          <rect class="bd" x="199" y="292" width="22" height="15" rx="7"/><text class="bdt" x="210" y="302.5" text-anchor="middle">21</text>
-          <rect class="bd" x="199" y="432" width="30" height="15" rx="7"/><text class="bdt" x="214" y="442.5" text-anchor="middle">4·16</text>
-          <rect class="bd" x="388" y="260" width="30" height="15" rx="7"/><text class="bdt" x="403" y="270.5" text-anchor="middle">1·9</text>
-          <rect class="bd" x="388" y="22" width="22" height="15" rx="7"/><text class="bdt" x="399" y="32.5" text-anchor="middle">13</text>
-          <rect class="bd" x="577" y="45"  width="20" height="15" rx="7"/><text class="bdt" x="587" y="55.5" text-anchor="middle">8</text>
-          <rect class="bd" x="577" y="110" width="30" height="15" rx="7"/><text class="bdt" x="592" y="120.5" text-anchor="middle">1·18</text>
-          <rect class="bd" x="577" y="267" width="46" height="15" rx="7"/><text class="bdt" x="600" y="277.5" text-anchor="middle">6·12·14</text>
-          <rect class="bd" x="577" y="342" width="26" height="15" rx="7"/><text class="bdt" x="590" y="352.5" text-anchor="middle">1·7</text>
-          <rect class="bd" x="766" y="229" width="22" height="15" rx="7"/><text class="bdt" x="777" y="239.5" text-anchor="middle">19</text>
+        <svg viewBox="0 0 940 550" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Fluxo em três jornadas e uma fase 2. Jornada Search e PMax leva às LPs por produto, depois à conversão, ao comercial e ao SQL. Jornada Demand Gen, com LinkedIn orgânico como teste, leva ao blog estratégico, ao pré-formulário do RD e ao WhatsApp do comercial; o blog também forma o público do pixel. Jornada Meta usa vídeos novos de produto, que também formam o público, e entrega conteúdos a quem leu ou viu. A fase 2, depois de validar o Demand Gen, tem ebook, campanha de leads, LP do ebook e régua de CRM.">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="mk"/></marker><marker id="ahn" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="mkn"/></marker></defs>
+          <rect class="lane" x="0" y="6" width="940" height="176" rx="9"/>
+          <text class="lh" x="12" y="21">SEARCH + PMAX → LPs POR PRODUTO</text>
+          <rect class="box" x="4" y="34" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="51">Google Search</text>
+          <text class="s" x="13" y="64">marca, distribuidores,</text>
+          <text class="s" x="13" y="75">dores do campo</text>
+          <rect class="bd" x="10" y="26" width="19" height="15" rx="7"/><text class="bdt" x="19.7" y="36.5" text-anchor="middle">9</text>
+          <rect class="box" x="4" y="86" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="103">PMax</text>
+          <text class="s" x="13" y="116">por produto, depois do</text>
+          <text class="s" x="13" y="127">rastreio validado</text>
+          <rect class="bd" x="10" y="78" width="25" height="15" rx="7"/><text class="bdt" x="22.4" y="88.5" text-anchor="middle">10</text>
+          <rect class="box" x="199" y="34" width="152" height="44" rx="7"/>
+          <text class="t" x="208" y="51">LP Promoter</text>
+          <text class="s" x="208" y="64">versão Distribuidores</text>
+          <text class="s" x="208" y="75">CTA: demonstração</text>
+          <rect class="pl" x="317" y="26" width="28" height="15" rx="7"/><text class="ptl" x="331" y="36.5" text-anchor="middle">LP</text>
+          <rect class="bd" x="205" y="26" width="19" height="15" rx="7"/><text class="bdt" x="214.7" y="36.5" text-anchor="middle">6</text>
+          <rect class="box" x="199" y="86" width="152" height="44" rx="7"/>
+          <text class="t" x="208" y="103">LP Lite</text>
+          <text class="s" x="208" y="116">sem preço, form curto</text>
+          <text class="s" x="208" y="127">Ver como começar</text>
+          <rect class="pl" x="317" y="78" width="28" height="15" rx="7"/><text class="ptl" x="331" y="88.5" text-anchor="middle">LP</text>
+          <rect class="bd" x="205" y="78" width="19" height="15" rx="7"/><text class="bdt" x="214.7" y="88.5" text-anchor="middle">7</text>
+          <rect class="box dash" x="199" y="138" width="152" height="34" rx="7"/>
+          <text class="t" x="208" y="155">LP Enterprise</text>
+          <text class="s" x="208" y="168">a confirmar</text>
+          <rect class="pl" x="317" y="130" width="28" height="15" rx="7"/><text class="ptl" x="331" y="140.5" text-anchor="middle">LP</text>
+          <rect class="bd" x="205" y="130" width="19" height="15" rx="7"/><text class="bdt" x="214.7" y="140.5" text-anchor="middle">8</text>
+          <rect class="box" x="394" y="62" width="152" height="44" rx="7"/>
+          <text class="t" x="403" y="79">Conversão na LP</text>
+          <text class="s" x="403" y="92">formulário do RD</text>
+          <text class="s" x="403" y="103">ou WhatsApp</text>
+          <rect class="bd" x="400" y="54" width="30" height="15" rx="7"/><text class="bdt" x="415.1" y="64.5" text-anchor="middle">1·2</text>
+          <rect class="box" x="589" y="62" width="152" height="44" rx="7"/>
+          <text class="t" x="598" y="79">Contato comercial</text>
+          <text class="s" x="598" y="92">pergunta de diagnóstico</text>
+          <text class="s" x="598" y="103">no WhatsApp</text>
+          <rect class="bd" x="595" y="54" width="25" height="15" rx="7"/><text class="bdt" x="607.4" y="64.5" text-anchor="middle">18</text>
+          <rect class="box" x="784" y="62" width="152" height="44" rx="7"/>
+          <text class="t" x="793" y="79">Discovery e SQL</text>
+          <text class="s" x="793" y="92">demonstração, proposta</text>
+          <text class="s" x="793" y="103">e implantação</text>
+          <rect class="bd" x="790" y="54" width="25" height="15" rx="7"/><text class="bdt" x="802.4" y="64.5" text-anchor="middle">19</text>
+          <polyline class="ln" points="156,56 197,56" marker-end="url(#ah)"/>
+          <polyline class="ln" points="156,108 197,108" marker-end="url(#ah)"/>
+          <polyline class="ln" points="178,56 178,155"/>
+          <polyline class="ln" points="178,155 197,155" marker-end="url(#ah)"/>
+          <polyline class="ln" points="351,56 372,56"/>
+          <polyline class="ln" points="351,108 372,108"/>
+          <polyline class="ln" points="351,155 372,155"/>
+          <polyline class="ln" points="372,56 372,155"/>
+          <polyline class="ln" points="372,84 392,84" marker-end="url(#ah)"/>
+          <polyline class="ln" points="546,84 587,84" marker-end="url(#ah)"/>
+          <text class="lb" x="566" y="76" text-anchor="middle">lead</text>
+          <polyline class="ln" points="741,84 782,84" marker-end="url(#ah)"/>
+          <rect class="lane" x="0" y="190" width="940" height="170" rx="9"/>
+          <text class="lh" x="12" y="205">DEMAND GEN → BLOG ESTRATÉGICO → WHATSAPP</text>
+          <rect class="box dash" x="4" y="224" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="241">LinkedIn orgânico</text>
+          <text class="s" x="13" y="254">teste do blog post</text>
+          <rect class="bd" x="10" y="216" width="25" height="15" rx="7"/><text class="bdt" x="22.4" y="226.5" text-anchor="middle">17</text>
+          <rect class="nw" x="4" y="278" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="295">Google Demand Gen</text>
+          <text class="s" x="13" y="308">verba mínima da</text>
+          <text class="s" x="13" y="319">plataforma, leva ao blog</text>
+          <rect class="pill" x="112" y="270" width="40" height="15" rx="7"/><text class="pt" x="132" y="280.5" text-anchor="middle">NOVO</text>
+          <rect class="bd" x="10" y="270" width="25" height="15" rx="7"/><text class="bdt" x="22.4" y="280.5" text-anchor="middle">16</text>
+          <rect class="nw" x="199" y="236" width="152" height="54" rx="7"/>
+          <text class="t" x="208" y="253">Blog estratégico</text>
+          <text class="s" x="208" y="266">posts no site</text>
+          <text class="s" x="208" y="277">CTA: pré-form + WhatsApp</text>
+          <rect class="pill" x="307" y="228" width="40" height="15" rx="7"/><text class="pt" x="327" y="238.5" text-anchor="middle">NOVO</text>
+          <rect class="bd" x="205" y="228" width="25" height="15" rx="7"/><text class="bdt" x="217.4" y="238.5" text-anchor="middle">15</text>
+          <rect class="box" x="394" y="241" width="152" height="44" rx="7"/>
+          <text class="t" x="403" y="258">Pré-form RD</text>
+          <text class="s" x="403" y="271">→ WhatsApp do</text>
+          <text class="s" x="403" y="282">comercial</text>
+          <rect class="bd" x="400" y="233" width="30" height="15" rx="7"/><text class="bdt" x="415.1" y="243.5" text-anchor="middle">1·2</text>
+          <rect class="nw" x="394" y="304" width="152" height="44" rx="7"/>
+          <text class="t" x="403" y="321">Público do pixel</text>
+          <text class="s" x="403" y="334">leu o post ou viu o</text>
+          <text class="s" x="403" y="345">vídeo, por tema</text>
+          <rect class="pill" x="502" y="296" width="40" height="15" rx="7"/><text class="pt" x="522" y="306.5" text-anchor="middle">NOVO</text>
+          <rect class="bd" x="400" y="296" width="19" height="15" rx="7"/><text class="bdt" x="409.7" y="306.5" text-anchor="middle">5</text>
+          <rect class="box" x="589" y="241" width="152" height="44" rx="7"/>
+          <text class="t" x="598" y="258">WhatsApp comercial</text>
+          <text class="s" x="598" y="271">segue o fluxo</text>
+          <text class="s" x="598" y="282">comercial</text>
+          <rect class="bd" x="595" y="233" width="25" height="15" rx="7"/><text class="bdt" x="607.4" y="243.5" text-anchor="middle">18</text>
+          <rect class="box" x="784" y="241" width="152" height="44" rx="7"/>
+          <text class="t" x="793" y="258">Fluxo comercial</text>
+          <text class="s" x="793" y="271">Discovery e SQL</text>
+          <polyline class="ln dash" points="156,246 197,246" marker-end="url(#ah)"/>
+          <text class="lb" x="176" y="238" text-anchor="middle">link</text>
+          <polyline class="lnn" points="156,300 178,300 178,282 197,282" marker-end="url(#ahn)"/>
+          <text class="lbn" x="177" y="318" text-anchor="middle">clique</text>
+          <polyline class="lnn" points="351,263 392,263" marker-end="url(#ahn)"/>
+          <text class="lbn" x="372" y="255" text-anchor="middle">CTA</text>
+          <polyline class="lnn" points="351,284 372,284 372,318 392,318" marker-end="url(#ahn)"/>
+          <text class="lbn" x="380" y="303" text-anchor="start">leu</text>
+          <polyline class="lnn" points="546,263 587,263" marker-end="url(#ahn)"/>
+          <polyline class="ln" points="741,263 782,263" marker-end="url(#ah)"/>
+          <rect class="lane" x="0" y="368" width="940" height="84" rx="9"/>
+          <text class="lh" x="12" y="383">META: VÍDEOS NOVOS E CONTEÚDOS</text>
+          <rect class="box" x="4" y="398" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="415">Vídeos novos</text>
+          <text class="s" x="13" y="428">de produto</text>
+          <text class="s" x="13" y="439">(P1, P2, L1...)</text>
+          <rect class="bd" x="10" y="390" width="41" height="15" rx="7"/><text class="bdt" x="30.5" y="400.5" text-anchor="middle">11·14</text>
+          <rect class="box" x="199" y="398" width="152" height="44" rx="7"/>
+          <text class="t" x="208" y="415">Meta: topo</text>
+          <text class="s" x="208" y="428">ICP, sem Audience</text>
+          <text class="s" x="208" y="439">Network</text>
+          <rect class="bd" x="205" y="390" width="25" height="15" rx="7"/><text class="bdt" x="217.4" y="400.5" text-anchor="middle">12</text>
+          <rect class="box" x="589" y="398" width="152" height="44" rx="7"/>
+          <text class="t" x="598" y="415">Meta: conteúdos</text>
+          <text class="s" x="598" y="428">para quem leu ou viu</text>
+          <text class="s" x="598" y="439">(remarketing)</text>
+          <rect class="bd" x="595" y="390" width="25" height="15" rx="7"/><text class="bdt" x="607.4" y="400.5" text-anchor="middle">13</text>
+          <polyline class="ln" points="156,420 197,420" marker-end="url(#ah)"/>
+          <polyline class="lnn" points="351,420 372,420 372,334 392,334" marker-end="url(#ahn)"/>
+          <text class="lbn" x="380" y="395" text-anchor="start">viu o vídeo</text>
+          <polyline class="lnn" points="546,326 567,326 567,420 587,420" marker-end="url(#ahn)"/>
+          <text class="lbn" x="575" y="372" text-anchor="start">público</text>
+          <rect class="lane dash" x="0" y="460" width="940" height="82" rx="9"/>
+          <text class="lh" x="12" y="475">FASE 2 · EBOOK + CAMPANHA DE LEADS + RÉGUA (depois de validar o Demand Gen)</text>
+          <rect class="box dash" x="4" y="490" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="507">Ebook</text>
+          <text class="s" x="13" y="520">conteúdo-gatilho</text>
+          <rect class="bd" x="10" y="482" width="25" height="15" rx="7"/><text class="bdt" x="22.4" y="492.5" text-anchor="middle">20</text>
+          <rect class="box dash" x="199" y="490" width="152" height="44" rx="7"/>
+          <text class="t" x="208" y="507">Campanha de leads</text>
+          <text class="s" x="208" y="520">Meta, público quente</text>
+          <rect class="bd" x="205" y="482" width="25" height="15" rx="7"/><text class="bdt" x="217.4" y="492.5" text-anchor="middle">21</text>
+          <rect class="box dash" x="394" y="490" width="152" height="44" rx="7"/>
+          <text class="t" x="403" y="507">LP do ebook</text>
+          <text class="s" x="403" y="520">formulário do RD</text>
+          <rect class="pl" x="512" y="482" width="28" height="15" rx="7"/><text class="ptl" x="526" y="492.5" text-anchor="middle">LP</text>
+          <rect class="bd" x="400" y="482" width="25" height="15" rx="7"/><text class="bdt" x="412.4" y="492.5" text-anchor="middle">20</text>
+          <rect class="box dash" x="589" y="490" width="152" height="44" rx="7"/>
+          <text class="t" x="598" y="507">CRM RD + régua</text>
+          <text class="s" x="598" y="520">trilhas por perfil</text>
+          <rect class="bd" x="595" y="482" width="25" height="15" rx="7"/><text class="bdt" x="607.4" y="492.5" text-anchor="middle">22</text>
+          <rect class="box dash" x="784" y="490" width="152" height="44" rx="7"/>
+          <text class="t" x="793" y="507">Comercial</text>
+          <text class="s" x="793" y="520">Discovery e SQL</text>
+          <polyline class="ln dash" points="156,512 197,512" marker-end="url(#ah)"/>
+          <polyline class="ln dash" points="351,512 392,512" marker-end="url(#ah)"/>
+          <polyline class="ln dash" points="546,512 587,512" marker-end="url(#ah)"/>
+          <polyline class="ln dash" points="741,512 782,512" marker-end="url(#ah)"/>
         </svg>
       </div>
     </section>
@@ -401,17 +349,17 @@
       <h2>Para o GT validar</h2>
       <div class="grow">
         <ul class="list">
-          <li>Verba por frente e o piso do Demand Gen.</li>
+          <li>Verba por jornada e o piso do Demand Gen.</li>
+          <li>Entrada do PMax e a estrutura por produto.</li>
           <li>Lance do Demand Gen: cliques ou conversão.</li>
           <li>Janelas e tamanho mínimo dos públicos.</li>
           <li>Critério de visita qualificada e eventos do pixel.</li>
           <li>Exclusões (leads e clientes) e frequência do remarketing.</li>
-          <li>Critérios dos portões e metas por etapa.</li>
-          <li>Cadência do blog e do LinkedIn.</li>
+          <li>Critérios para validar o Demand Gen e liberar a fase 2.</li>
         </ul>
         <div class="box2" style="margin-top:10px">
           <b>Pendências</b>
-          <span>O que está errado na saída do WhatsApp? O evento do RD chega ao GTM e ao GA4? Faltam telas, Sankhya e WinThor e os depoimentos.</span>
+          <span>O que está errado na saída do WhatsApp? O evento do RD chega ao GTM e ao GA4? Enterprise tem LP própria? Faltam telas, Sankhya e WinThor e os depoimentos.</span>
         </div>
       </div>
     </section>
@@ -420,44 +368,36 @@
   <!-- cronograma -->
   <section class="panel ganttbox" aria-label="Ações no tempo">
     <div class="scrollx">
-      <svg viewBox="0 0 1260 312" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cronograma das 21 ações em sete frentes e quatro etapas: base, blog e público, ebook e remarketing, decisão. Portão 1: rastreio validado e primeiro post no ar. Portão 2: público qualificado formado. Portão 3: ebook no ar, o custo por MQL decide a verba.">
+      <svg viewBox="0 0 1260 292" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cronograma das 22 ações em seis frentes e quatro etapas: base, jornadas, validação, fase 2. Portão 1: rastreio validado. Portão 2: público qualificado formado. Portão 3: Demand Gen validado libera a fase 2.">
         <text class="h" x="322" y="16" text-anchor="middle">1. BASE</text>
-        <text class="h" x="587" y="16" text-anchor="middle">2. BLOG E PÚBLICO</text>
-        <text class="h" x="852" y="16" text-anchor="middle">3. EBOOK E REMARKETING</text>
-        <text class="h" x="1117" y="16" text-anchor="middle">4. DECISÃO</text>
-        <line class="gate" x1="455" y1="24" x2="455" y2="282"/>
-        <line class="gate" x1="720" y1="24" x2="720" y2="282"/>
-        <line class="gate" x1="985" y1="24" x2="985" y2="282"/>
-        <text class="rl" x="10" y="47">Medição · V4</text>
-        <rect class="bar" x="198" y="28" width="249" height="28" rx="6"/><text class="bt" x="207" y="46">1 WhatsApp + pré-form · 3 UTM · 9 eventos</text>
-        <rect class="bar" x="463" y="28" width="249" height="28" rx="6"/><text class="bt" x="472" y="46">2 conversão do RD · 4 MQL no Google Ads</text>
-        <text class="rl" x="10" y="83">Blog e orgânico · V4</text>
-        <rect class="bar" x="198" y="64" width="249" height="28" rx="6"/><text class="bt" x="207" y="82">11 primeiro post estratégico</text>
-        <rect class="bar" x="463" y="64" width="249" height="28" rx="6"/><text class="bt" x="472" y="82">11 demais posts · 20 LinkedIn · 21 públicos</text>
-        <rect class="bar" x="728" y="64" width="249" height="28" rx="6"/><text class="bt" x="737" y="82">11 novos posts · 20 LinkedIn</text>
-        <text class="rl" x="10" y="119">Páginas e ebook · V4</text>
-        <rect class="bar" x="198" y="100" width="249" height="28" rx="6"/><text class="bt" x="207" y="118">7 LP Promoter (Distribuidores)</text>
-        <rect class="bar" x="463" y="100" width="249" height="28" rx="6"/><text class="bt" x="472" y="118">6 Ver como funciona · 8 Lite · 10 ebook</text>
-        <rect class="bar" x="728" y="100" width="249" height="28" rx="6"/><text class="bt" x="737" y="118">5 LP ebook · 10 lançar · 13 pós-download</text>
-        <text class="rl" x="10" y="155">Vídeos · V4 + TradePRO</text>
-        <rect class="bar" x="198" y="136" width="249" height="28" rx="6"/><text class="bt" x="207" y="154">12 vídeo P1 · 14 depoimentos</text>
-        <rect class="bar" x="463" y="136" width="249" height="28" rx="6"/><text class="bt" x="472" y="154">12 vídeos P2 e L1</text>
-        <text class="rl" x="10" y="191">Meta · V4</text>
-        <rect class="bar" x="198" y="172" width="249" height="28" rx="6"/><text class="bt" x="207" y="190">15 higiene (sem Audience Network)</text>
-        <rect class="bar" x="463" y="172" width="249" height="28" rx="6"/><text class="bt" x="472" y="190">15 vídeos de produto no topo</text>
-        <rect class="bar" x="728" y="172" width="249" height="28" rx="6"/><text class="bt" x="737" y="190">15 remarketing do público → ebook</text>
-        <rect class="bart" x="993" y="172" width="249" height="28" rx="6"/><text class="bt" x="1002" y="190">decisão pelo custo por MQL</text>
-        <text class="rl" x="10" y="227">Google · V4</text>
-        <rect class="bar" x="198" y="208" width="249" height="28" rx="6"/><text class="bt" x="207" y="226">16 Search: negativas, Distribuidores</text>
-        <rect class="bar" x="463" y="208" width="249" height="28" rx="6"/><text class="bt" x="472" y="226">17 Demand Gen no ar (verba mínima)</text>
-        <rect class="bar" x="728" y="208" width="249" height="28" rx="6"/><text class="bt" x="737" y="226">17 Demand Gen: manter ou parar</text>
-        <rect class="bart" x="993" y="208" width="249" height="28" rx="6"/><text class="bt" x="1002" y="226">decisão: custo por MQL e público</text>
-        <text class="rl" x="10" y="263">Comercial · TradePRO</text>
-        <rect class="bar" x="198" y="244" width="249" height="28" rx="6"/><text class="bt" x="207" y="262">18 WhatsApp no CRM com próxima ação</text>
-        <rect class="bar" x="463" y="244" width="249" height="28" rx="6"/><text class="bt" x="472" y="262">19 MQL e SQL no RD CRM</text>
-        <text class="lb" x="455" y="300" text-anchor="middle">Portão 1: rastreio validado e 1º post no ar</text>
-        <text class="lb" x="720" y="300" text-anchor="middle">Portão 2: público qualificado formado</text>
-        <text class="lb" x="985" y="300" text-anchor="middle">Portão 3: ebook no ar, custo por MQL decide a verba</text>
+        <text class="h" x="587" y="16" text-anchor="middle">2. JORNADAS NO AR</text>
+        <text class="h" x="852" y="16" text-anchor="middle">3. VALIDAÇÃO</text>
+        <text class="h" x="1117" y="16" text-anchor="middle">4. FASE 2: LEADS</text>
+        <line class="gate" x1="455" y1="24" x2="455" y2="262"/>
+        <line class="gate" x1="720" y1="24" x2="720" y2="262"/>
+        <line class="gate" x1="985" y1="24" x2="985" y2="262"/>
+        <text class="rl" x="10" y="47">Base e medição · V4</text>
+        <rect class="bar" x="198" y="28" width="249" height="28" rx="6"/><text class="bt" x="207" y="46">1 WhatsApp + pré-form · 2 RD · 3 UTM</text>
+        <rect class="bar" x="463" y="28" width="249" height="28" rx="6"/><text class="bt" x="472" y="46">4 MQL no Google Ads · 5 eventos e públicos</text>
+        <text class="rl" x="10" y="83">Search + PMax · V4</text>
+        <rect class="bar" x="198" y="64" width="249" height="28" rx="6"/><text class="bt" x="207" y="82">9 Search · 6 LP Promoter</text>
+        <rect class="bar" x="463" y="64" width="249" height="28" rx="6"/><text class="bt" x="472" y="82">7 LP Lite · 8 Enterprise · 10 PMax</text>
+        <text class="rl" x="10" y="119">Meta · V4</text>
+        <rect class="bar" x="198" y="100" width="249" height="28" rx="6"/><text class="bt" x="207" y="118">12 higiene · 11 vídeos novos (produção)</text>
+        <rect class="bar" x="463" y="100" width="249" height="28" rx="6"/><text class="bt" x="472" y="118">12 vídeos no topo · 13 conteúdos ao público</text>
+        <text class="rl" x="10" y="155">Blog e Demand Gen · V4</text>
+        <rect class="bar" x="198" y="136" width="249" height="28" rx="6"/><text class="bt" x="207" y="154">15 primeiro post · 16 Demand Gen · 17</text>
+        <rect class="bar" x="463" y="136" width="249" height="28" rx="6"/><text class="bt" x="472" y="154">15 posts estratégicos · 16 · 17 teste do blog</text>
+        <rect class="bart" x="728" y="136" width="249" height="28" rx="6"/><text class="bt" x="737" y="154">validar o Demand Gen</text>
+        <text class="rl" x="10" y="191">Comercial · TradePRO</text>
+        <rect class="bar" x="198" y="172" width="249" height="28" rx="6"/><text class="bt" x="207" y="190">18 WhatsApp no CRM com próxima ação</text>
+        <rect class="bar" x="463" y="172" width="249" height="28" rx="6"/><text class="bt" x="472" y="190">19 MQL e SQL no RD CRM</text>
+        <text class="rl" x="10" y="227">Fase 2 · V4 + TradePRO</text>
+        <rect class="bart" x="463" y="208" width="249" height="28" rx="6"/><text class="bt" x="472" y="226">20 ebook em produção</text>
+        <rect class="bart" x="993" y="208" width="249" height="28" rx="6"/><text class="bt" x="1002" y="226">21 campanha de leads · 22 régua de CRM</text>
+        <text class="lb" x="455" y="282" text-anchor="middle">Portão 1: rastreio validado</text>
+        <text class="lb" x="720" y="282" text-anchor="middle">Portão 2: público qualificado formado</text>
+        <text class="lb" x="985" y="282" text-anchor="middle">Portão 3: Demand Gen validado libera a fase 2</text>
         </svg>
     </div>
     <div class="src">V4 executa. A TradePRO valida conteúdo e páginas, fornece as telas, autoriza os depoimentos e cuida do comercial (18 e 19). Barras tracejadas são decisões. Valores, verba, janelas e metas ficam com o gestor de tráfego.</div>
