@@ -1,0 +1,411 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mapa de Demanda TradePRO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700&family=Open+Sans:wght@400;600&display=swap">
+<style>
+  /* Layout: uma tela. Três colunas (números, mapa, leitura) e uma faixa de cronograma embaixo.
+     Abaixo de 1100px a tela empilha e rola. */
+  :root {
+    --bg: #F4F6FC;
+    --surface: #FFFFFF;
+    --tint: #E9EEFB;
+    --line: #B9C4E6;
+    --fg: #0B1437;
+    --muted: #4A5584;
+    --accent: #2642B5;
+    --accent-ink: #FFFFFF;
+    --novo: #7A2BE0;
+    --novo-bg: #F0E6FF;
+    --novo-ink: #FFFFFF;
+    --warn: #9A4A00;
+    --warn-bg: #FFF1D6;
+    --font-d: 'Cairo', 'Segoe UI', system-ui, sans-serif;
+    --font-b: 'Open Sans', 'Segoe UI', system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #080D2B; --surface: #111A47; --tint: #0E1639; --line: #33407F;
+      --fg: #E8ECFF; --muted: #A5B0E0; --accent: #7FA0FF; --accent-ink: #0A1030;
+      --novo: #C48BFF; --novo-bg: #2A1655; --novo-ink: #1A0B3A;
+      --warn: #F5B35A; --warn-bg: #3A2A0A;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #080D2B; --surface: #111A47; --tint: #0E1639; --line: #33407F;
+    --fg: #E8ECFF; --muted: #A5B0E0; --accent: #7FA0FF; --accent-ink: #0A1030;
+    --novo: #C48BFF; --novo-bg: #2A1655; --novo-ink: #1A0B3A;
+    --warn: #F5B35A; --warn-bg: #3A2A0A;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-b);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .app {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr) auto;
+    gap: 12px;
+    padding: 14px max(18px, env(safe-area-inset-right, 0px)) 12px max(18px, env(safe-area-inset-left, 0px));
+  }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; }
+  h1 { font-family: var(--font-d); font-size: 24px; font-weight: 700; color: var(--accent); margin: 0; line-height: 1.1; }
+  .meta { color: var(--muted); font-size: 12px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 11.5px; color: var(--muted); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .sw { width: 18px; height: 12px; border-radius: 3px; border: 2px solid var(--line); background: var(--surface); }
+  .sw.n { border-color: var(--novo); background: var(--novo-bg); }
+  .sw.d { border-style: dashed; }
+  .sw.l { border: 0; background: var(--accent); border-radius: 6px; }
+  .sw.w { border-color: var(--warn); background: var(--warn-bg); border-radius: 6px; }
+
+  .main { display: grid; grid-template-columns: 250px minmax(0, 1fr) 320px; gap: 12px; min-height: 0; }
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-height: 0; min-width: 0; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .panel h2 { font-family: var(--font-d); font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0; font-weight: 700; }
+  .mapbox { padding: 8px; }
+  .mapbox .fig { flex: 1; min-height: 0; overflow-x: auto; overflow-y: hidden; }
+  .mapbox svg { display: block; width: 100%; height: 100%; }
+
+  .kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .kpi { background: var(--tint); border-radius: 8px; padding: 8px 10px; min-width: 0; }
+  .kpi b { display: block; font-family: var(--font-d); font-size: 20px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .kpi span { display: block; font-size: 11px; color: var(--muted); }
+  .kpi.bad b { color: var(--warn); }
+  table { border-collapse: collapse; width: 100%; font-size: 12px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: right; padding: 4px 3px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; padding-left: 0; }
+  th { font-weight: 600; color: var(--muted); font-size: 11px; }
+  tr:last-child td { border-bottom: 0; }
+  .src { font-size: 10.5px; color: var(--muted); }
+  .list { margin: 0; padding-left: 16px; display: flex; flex-direction: column; gap: 5px; font-size: 12px; }
+  .box2 { background: var(--tint); border-radius: 8px; padding: 7px 10px; font-size: 11.5px; line-height: 1.4; display: flex; flex-direction: column; gap: 2px; }
+  .box2 b { font-family: var(--font-d); font-size: 13px; color: var(--accent); }
+  .grow { flex: 1; min-height: 0; overflow: auto; }
+
+  .ganttbox { padding: 8px 12px; gap: 4px; }
+  .ganttbox svg { display: block; width: 100%; height: auto; max-height: 31vh; }
+  .ganttbox .scrollx { overflow-x: auto; }
+  .ganttbox svg { min-width: 900px; }
+
+  /* SVG, estilizado pela página */
+  .t  { fill: var(--fg);    font-family: var(--font-b); font-size: 12px; font-weight: 600; }
+  .s  { fill: var(--muted); font-family: var(--font-b); font-size: 10.5px; }
+  .h  { fill: var(--muted); font-family: var(--font-d); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; }
+  .lb { fill: var(--muted); font-family: var(--font-b); font-size: 10px; }
+  .lbn{ fill: var(--novo);  font-family: var(--font-b); font-size: 10px; font-weight: 600; }
+  .box  { fill: var(--surface); stroke: var(--line); stroke-width: 1.4; }
+  .cont { fill: var(--tint);    stroke: var(--line); stroke-width: 1.4; }
+  .nw   { fill: var(--novo-bg); stroke: var(--novo); stroke-width: 2.2; }
+  .dash { stroke-dasharray: 5 3; }
+  .ln   { fill: none; stroke: var(--muted); stroke-width: 1.4; }
+  .lnn  { fill: none; stroke: var(--novo);  stroke-width: 1.8; }
+  .mk   { fill: var(--muted); }
+  .mkn  { fill: var(--novo); }
+  .pill { fill: var(--novo); }
+  .pt   { fill: var(--novo-ink); font-family: var(--font-b); font-size: 8.5px; font-weight: 700; letter-spacing: 0.05em; }
+  .pl   { fill: var(--accent); }
+  .ptl  { fill: var(--accent-ink); font-family: var(--font-b); font-size: 8.5px; font-weight: 700; letter-spacing: 0.05em; }
+  .bd   { fill: var(--warn-bg); stroke: var(--warn); stroke-width: 1; }
+  .bdt  { fill: var(--warn); font-family: var(--font-b); font-size: 9px; font-weight: 700; }
+  .lbg  { fill: var(--surface); }
+  .bar  { fill: var(--tint); stroke: var(--accent); stroke-width: 1.4; }
+  .bart { fill: var(--surface); stroke: var(--muted); stroke-width: 1.4; stroke-dasharray: 5 3; }
+  .bt   { fill: var(--fg); font-family: var(--font-b); font-size: 10.5px; }
+  .rl   { fill: var(--fg); font-family: var(--font-d); font-size: 12.5px; font-weight: 700; }
+  .lane { fill: var(--tint); stroke: var(--line); stroke-width: 1; opacity: 0.55; }
+  .lh   { fill: var(--muted); font-family: var(--font-d); font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; }
+  .gate { stroke: var(--muted); stroke-width: 1.2; stroke-dasharray: 4 4; }
+
+  @media (max-width: 1400px) {
+    .main { grid-template-columns: 220px minmax(0, 1fr) 280px; }
+    table { font-size: 11px; }
+    .list { font-size: 11.5px; gap: 4px; }
+    .box2 { font-size: 11px; }
+    .kpi b { font-size: 18px; }
+  }
+  @media (max-height: 950px) and (min-width: 1101px) {
+    .kpi { padding: 5px 9px; }
+    .kpi b { font-size: 17px; }
+    .panel { gap: 8px; }
+    .kpis + table + .src { display: none; }
+  }
+  @media (max-height: 800px) and (min-width: 1101px) {
+    .hide-short, .src { display: none; }
+  }
+  @media (max-width: 1100px) {
+    .mapbox svg { min-width: 760px; height: auto; }
+    .app { height: auto; display: flex; flex-direction: column; }
+    .main { grid-template-columns: 1fr; }
+    .panel { overflow: visible; }
+    .mapbox .fig { min-height: 0; }
+    .ganttbox svg { max-height: none; }
+    .grow { overflow: visible; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div>
+      <h1>Mapa de Demanda TradePRO</h1>
+      <div class="meta">Só a estrutura, sem valores: o gestor de tráfego valida · atualizado em 06/11/2026 · plano, nada foi executado em conta</div>
+    </div>
+    <div class="legend" aria-hidden="true">
+      <span><i class="sw w"></i>número = ação no cronograma</span>
+      <span><i class="sw n"></i>novo</span>
+      <span><i class="sw l"></i>página a criar ou ajustar</span>
+      <span><i class="sw d"></i>orgânico, a confirmar ou fase 2</span>
+    </div>
+  </header>
+
+  <div class="main">
+    <!-- coluna esquerda: onde estamos -->
+    <section class="panel" aria-label="Premissas da estrutura">
+      <h2>Premissas</h2>
+      <ul class="list">
+        <li>Três jornadas rodam para <b>formar público qualificado</b>: Search + PMax para LPs por produto, Meta com vídeos novos e Demand Gen para o blog.</li>
+        <li>O blog é <b>estratégico</b>, com CTA para o <b>WhatsApp</b> via pré-formulário do RD.</li>
+        <li>Quem leu o blog <b>já recebe conteúdo no Meta</b>. <b>Cada vídeo leva à LP do seu produto.</b></li>
+        <li>LinkedIn orgânico é um <b>teste do blog post</b>.</li>
+        <li>O <b>ebook é outra estratégia</b> (geração de leads), na fase 2, depois de validar o Demand Gen: ebook, campanha de leads e régua de CRM.</li>
+        <li>Download não é MQL.</li>
+      </ul>
+    </section>
+
+    <!-- centro: mapa -->
+    <section class="panel mapbox" aria-label="Mapa da estrutura">
+      <div class="fig">
+        <svg viewBox="0 0 940 516" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Fluxo em três jornadas e uma fase 2. Jornada Search e PMax leva às LPs por produto, depois à conversão, ao comercial e ao SQL. Jornada Demand Gen, com LinkedIn orgânico como teste, leva ao blog estratégico, ao pré-formulário do RD e ao WhatsApp do comercial; o blog também forma o público do pixel. Jornada Meta usa vídeos novos de produto: cada vídeo leva à LP do seu produto e também forma o público, que recebe conteúdos de remarketing. A fase 2, depois de validar o Demand Gen, tem ebook, campanha de leads, LP do ebook e régua de CRM.">
+          <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="mk"/></marker><marker id="ahn" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="userSpaceOnUse" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="mkn"/></marker></defs>
+          <rect class="lane" x="0" y="6" width="940" height="134" rx="9"/>
+          <text class="lh" x="12" y="21">SEARCH + PMAX → LPs POR PRODUTO</text>
+          <rect class="box" x="4" y="34" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="51">Google Search</text>
+          <text class="s" x="13" y="64">marca, distribuidores,</text>
+          <text class="s" x="13" y="75">dores do campo</text>
+          <rect class="bd" x="10" y="26" width="19" height="15" rx="7"/><text class="bdt" x="19.7" y="36.5" text-anchor="middle">8</text>
+          <rect class="box" x="4" y="86" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="103">PMax</text>
+          <text class="s" x="13" y="116">por produto, depois do</text>
+          <text class="s" x="13" y="127">rastreio validado</text>
+          <rect class="bd" x="10" y="78" width="19" height="15" rx="7"/><text class="bdt" x="19.7" y="88.5" text-anchor="middle">9</text>
+          <rect class="box" x="199" y="34" width="152" height="44" rx="7"/>
+          <text class="t" x="208" y="51">LP Promoter</text>
+          <text class="s" x="208" y="64">versão Distribuidores</text>
+          <text class="s" x="208" y="75">+ seção Enterprise</text>
+          <rect class="pl" x="317" y="26" width="28" height="15" rx="7"/><text class="ptl" x="331" y="36.5" text-anchor="middle">LP</text>
+          <rect class="bd" x="205" y="26" width="19" height="15" rx="7"/><text class="bdt" x="214.7" y="36.5" text-anchor="middle">6</text>
+          <rect class="box" x="199" y="86" width="152" height="44" rx="7"/>
+          <text class="t" x="208" y="103">LP Lite</text>
+          <text class="s" x="208" y="116">sem preço, form curto</text>
+          <text class="s" x="208" y="127">Ver como começar</text>
+          <rect class="pl" x="317" y="78" width="28" height="15" rx="7"/><text class="ptl" x="331" y="88.5" text-anchor="middle">LP</text>
+          <rect class="bd" x="205" y="78" width="19" height="15" rx="7"/><text class="bdt" x="214.7" y="88.5" text-anchor="middle">7</text>
+          <rect class="box" x="394" y="62" width="152" height="44" rx="7"/>
+          <text class="t" x="403" y="79">Conversão na LP</text>
+          <text class="s" x="403" y="92">formulário do RD</text>
+          <text class="s" x="403" y="103">ou WhatsApp</text>
+          <rect class="bd" x="400" y="54" width="30" height="15" rx="7"/><text class="bdt" x="415.1" y="64.5" text-anchor="middle">1·2</text>
+          <rect class="box" x="589" y="62" width="152" height="44" rx="7"/>
+          <text class="t" x="598" y="79">Contato comercial</text>
+          <text class="s" x="598" y="92">pergunta de diagnóstico</text>
+          <text class="s" x="598" y="103">no WhatsApp</text>
+          <rect class="bd" x="595" y="54" width="25" height="15" rx="7"/><text class="bdt" x="607.4" y="64.5" text-anchor="middle">17</text>
+          <rect class="box" x="784" y="62" width="152" height="44" rx="7"/>
+          <text class="t" x="793" y="79">Discovery e SQL</text>
+          <text class="s" x="793" y="92">demonstração, proposta</text>
+          <text class="s" x="793" y="103">e implantação</text>
+          <rect class="bd" x="790" y="54" width="25" height="15" rx="7"/><text class="bdt" x="802.4" y="64.5" text-anchor="middle">18</text>
+          <polyline class="ln" points="156,56 197,56" marker-end="url(#ah)"/>
+          <polyline class="ln" points="156,108 197,108" marker-end="url(#ah)"/>
+          <polyline class="ln" points="178,56 178,108"/>
+          <polyline class="ln" points="351,56 372,56"/>
+          <polyline class="ln" points="351,108 372,108"/>
+          <polyline class="ln" points="372,56 372,108"/>
+          <polyline class="ln" points="372,84 392,84" marker-end="url(#ah)"/>
+          <polyline class="ln" points="546,84 587,84" marker-end="url(#ah)"/>
+          <text class="lb" x="566" y="76" text-anchor="middle">lead</text>
+          <polyline class="ln" points="741,84 782,84" marker-end="url(#ah)"/>
+          <g transform="translate(0,-42)">
+          <rect class="lane" x="0" y="190" width="940" height="170" rx="9"/>
+          <text class="lh" x="12" y="205">DEMAND GEN → BLOG ESTRATÉGICO → WHATSAPP</text>
+          <rect class="box dash" x="4" y="224" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="241">LinkedIn orgânico</text>
+          <text class="s" x="13" y="254">teste do blog post</text>
+          <rect class="bd" x="10" y="216" width="25" height="15" rx="7"/><text class="bdt" x="22.4" y="226.5" text-anchor="middle">16</text>
+          <rect class="nw" x="4" y="278" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="295">Google Demand Gen</text>
+          <text class="s" x="13" y="308">verba mínima da</text>
+          <text class="s" x="13" y="319">plataforma, leva ao blog</text>
+          <rect class="pill" x="112" y="270" width="40" height="15" rx="7"/><text class="pt" x="132" y="280.5" text-anchor="middle">NOVO</text>
+          <rect class="bd" x="10" y="270" width="25" height="15" rx="7"/><text class="bdt" x="22.4" y="280.5" text-anchor="middle">15</text>
+          <rect class="nw" x="199" y="236" width="152" height="54" rx="7"/>
+          <text class="t" x="208" y="253">Blog estratégico</text>
+          <text class="s" x="208" y="266">posts no site</text>
+          <text class="s" x="208" y="277">CTA: pré-form + WhatsApp</text>
+          <rect class="pill" x="307" y="228" width="40" height="15" rx="7"/><text class="pt" x="327" y="238.5" text-anchor="middle">NOVO</text>
+          <rect class="bd" x="205" y="228" width="25" height="15" rx="7"/><text class="bdt" x="217.4" y="238.5" text-anchor="middle">14</text>
+          <rect class="box" x="394" y="241" width="152" height="44" rx="7"/>
+          <text class="t" x="403" y="258">Pré-form RD</text>
+          <text class="s" x="403" y="271">→ WhatsApp do</text>
+          <text class="s" x="403" y="282">comercial</text>
+          <rect class="bd" x="400" y="233" width="30" height="15" rx="7"/><text class="bdt" x="415.1" y="243.5" text-anchor="middle">1·2</text>
+          <rect class="nw" x="394" y="304" width="152" height="44" rx="7"/>
+          <text class="t" x="403" y="321">Público do pixel</text>
+          <text class="s" x="403" y="334">leu o post ou viu o</text>
+          <text class="s" x="403" y="345">vídeo, por tema</text>
+          <rect class="pill" x="502" y="296" width="40" height="15" rx="7"/><text class="pt" x="522" y="306.5" text-anchor="middle">NOVO</text>
+          <rect class="bd" x="400" y="296" width="19" height="15" rx="7"/><text class="bdt" x="409.7" y="306.5" text-anchor="middle">5</text>
+          <rect class="box" x="589" y="241" width="152" height="44" rx="7"/>
+          <text class="t" x="598" y="258">WhatsApp comercial</text>
+          <text class="s" x="598" y="271">segue o fluxo</text>
+          <text class="s" x="598" y="282">comercial</text>
+          <rect class="bd" x="595" y="233" width="25" height="15" rx="7"/><text class="bdt" x="607.4" y="243.5" text-anchor="middle">17</text>
+          <rect class="box" x="784" y="241" width="152" height="44" rx="7"/>
+          <text class="t" x="793" y="258">Fluxo comercial</text>
+          <text class="s" x="793" y="271">Discovery e SQL</text>
+          <polyline class="ln dash" points="156,246 197,246" marker-end="url(#ah)"/>
+          <text class="lb" x="176" y="238" text-anchor="middle">link</text>
+          <polyline class="lnn" points="156,300 178,300 178,282 197,282" marker-end="url(#ahn)"/>
+          <text class="lbn" x="177" y="318" text-anchor="middle">clique</text>
+          <polyline class="lnn" points="351,263 392,263" marker-end="url(#ahn)"/>
+          <text class="lbn" x="372" y="255" text-anchor="middle">CTA</text>
+          <polyline class="lnn" points="351,284 372,284 372,318 392,318" marker-end="url(#ahn)"/>
+          <text class="lbn" x="380" y="303" text-anchor="start">leu</text>
+          <polyline class="lnn" points="546,263 587,263" marker-end="url(#ahn)"/>
+          <polyline class="ln" points="741,263 782,263" marker-end="url(#ah)"/>
+          <rect class="lane" x="0" y="368" width="940" height="92" rx="9"/>
+          <text class="lh" x="12" y="383">META: VÍDEOS NOVOS E CONTEÚDOS</text>
+          <rect class="box" x="4" y="398" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="415">Vídeos novos</text>
+          <text class="s" x="13" y="428">de produto</text>
+          <text class="s" x="13" y="439">(P1, P2, L1...)</text>
+          <rect class="bd" x="10" y="390" width="41" height="15" rx="7"/><text class="bdt" x="30.5" y="400.5" text-anchor="middle">10·13</text>
+          <rect class="box" x="199" y="398" width="152" height="44" rx="7"/>
+          <text class="t" x="208" y="415">Meta: topo</text>
+          <text class="s" x="208" y="428">ICP, sem Audience</text>
+          <text class="s" x="208" y="439">Network</text>
+          <rect class="bd" x="205" y="390" width="25" height="15" rx="7"/><text class="bdt" x="217.4" y="400.5" text-anchor="middle">11</text>
+          <rect class="box" x="589" y="398" width="152" height="44" rx="7"/>
+          <text class="t" x="598" y="415">Meta: conteúdos</text>
+          <text class="s" x="598" y="428">para quem leu ou viu</text>
+          <text class="s" x="598" y="439">(remarketing)</text>
+          <rect class="bd" x="595" y="390" width="25" height="15" rx="7"/><text class="bdt" x="607.4" y="400.5" text-anchor="middle">12</text>
+          <rect class="box" x="394" y="393" width="152" height="54" rx="7"/>
+          <text class="t" x="403" y="410">LP do produto</text>
+          <text class="s" x="403" y="423">Promoter e Enterprise:</text>
+          <text class="s" x="403" y="434">LP Promoter</text>
+          <text class="s" x="403" y="445">Lite: LP Lite</text>
+          <rect class="pl" x="512" y="385" width="28" height="15" rx="7"/><text class="ptl" x="526" y="395.5" text-anchor="middle">LP</text>
+          <rect class="bd" x="400" y="385" width="30" height="15" rx="7"/><text class="bdt" x="415.1" y="395.5" text-anchor="middle">6·7</text>
+          <polyline class="ln" points="372,420 392,420" marker-end="url(#ah)"/>
+          <text class="lb" x="382" y="436" text-anchor="middle">clique</text>
+          <polyline class="ln" points="156,420 197,420" marker-end="url(#ah)"/>
+          <polyline class="lnn" points="351,420 372,420 372,334 392,334" marker-end="url(#ahn)"/>
+          <text class="lbn" x="378" y="378" text-anchor="start">viu o vídeo</text>
+          <polyline class="lnn" points="546,326 567,326 567,420 587,420" marker-end="url(#ahn)"/>
+          <text class="lbn" x="575" y="372" text-anchor="start">público</text>
+          <rect class="lane dash" x="0" y="468" width="940" height="82" rx="9"/>
+          <text class="lh" x="12" y="483">FASE 2 · EBOOK + CAMPANHA DE LEADS + RÉGUA (depois de validar o Demand Gen)</text>
+          <rect class="box dash" x="4" y="498" width="152" height="44" rx="7"/>
+          <text class="t" x="13" y="515">Ebook</text>
+          <text class="s" x="13" y="528">conteúdo-gatilho</text>
+          <rect class="bd" x="10" y="490" width="25" height="15" rx="7"/><text class="bdt" x="22.4" y="500.5" text-anchor="middle">19</text>
+          <rect class="box dash" x="199" y="498" width="152" height="44" rx="7"/>
+          <text class="t" x="208" y="515">Campanha de leads</text>
+          <text class="s" x="208" y="528">Meta, público quente</text>
+          <rect class="bd" x="205" y="490" width="25" height="15" rx="7"/><text class="bdt" x="217.4" y="500.5" text-anchor="middle">20</text>
+          <rect class="box dash" x="394" y="498" width="152" height="44" rx="7"/>
+          <text class="t" x="403" y="515">LP do ebook</text>
+          <text class="s" x="403" y="528">formulário do RD</text>
+          <rect class="pl" x="512" y="490" width="28" height="15" rx="7"/><text class="ptl" x="526" y="500.5" text-anchor="middle">LP</text>
+          <rect class="bd" x="400" y="490" width="25" height="15" rx="7"/><text class="bdt" x="412.4" y="500.5" text-anchor="middle">19</text>
+          <rect class="box dash" x="589" y="498" width="152" height="44" rx="7"/>
+          <text class="t" x="598" y="515">CRM RD + régua</text>
+          <text class="s" x="598" y="528">trilhas por perfil</text>
+          <rect class="bd" x="595" y="490" width="25" height="15" rx="7"/><text class="bdt" x="607.4" y="500.5" text-anchor="middle">21</text>
+          <rect class="box dash" x="784" y="498" width="152" height="44" rx="7"/>
+          <text class="t" x="793" y="515">Comercial</text>
+          <text class="s" x="793" y="528">Discovery e SQL</text>
+          <polyline class="ln dash" points="156,520 197,520" marker-end="url(#ah)"/>
+          <polyline class="ln dash" points="351,520 392,520" marker-end="url(#ah)"/>
+          <polyline class="ln dash" points="546,520 587,520" marker-end="url(#ah)"/>
+          <polyline class="ln dash" points="741,520 782,520" marker-end="url(#ah)"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- coluna direita: leitura -->
+    <section class="panel" aria-label="Para o GT validar">
+      <h2>Para o GT validar</h2>
+      <div class="grow">
+        <ul class="list">
+          <li>Verba por jornada e o piso do Demand Gen.</li>
+          <li>Entrada do PMax e a estrutura por produto.</li>
+          <li>Lance do Demand Gen: cliques ou conversão.</li>
+          <li>Janelas e tamanho mínimo dos públicos.</li>
+          <li>Critério de visita qualificada e eventos do pixel.</li>
+          <li>Exclusões (leads e clientes) e frequência do remarketing.</li>
+          <li>Critérios para validar o Demand Gen e liberar a fase 2.</li>
+        </ul>
+        <div class="box2" style="margin-top:10px">
+          <b>Pendências</b>
+          <span>O que está errado na saída do WhatsApp? O evento do RD chega ao GTM e ao GA4? Faltam telas, Sankhya e WinThor e os depoimentos.</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- cronograma -->
+  <section class="panel ganttbox" aria-label="Ações no tempo">
+    <div class="scrollx">
+      <svg viewBox="0 0 1260 292" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Cronograma das 21 ações em seis frentes e quatro etapas: base, jornadas, validação, fase 2. Portão 1: rastreio validado. Portão 2: público qualificado formado. Portão 3: Demand Gen validado libera a fase 2.">
+        <text class="h" x="322" y="16" text-anchor="middle">1. BASE</text>
+        <text class="h" x="587" y="16" text-anchor="middle">2. JORNADAS NO AR</text>
+        <text class="h" x="852" y="16" text-anchor="middle">3. VALIDAÇÃO</text>
+        <text class="h" x="1117" y="16" text-anchor="middle">4. FASE 2: LEADS</text>
+        <line class="gate" x1="455" y1="24" x2="455" y2="262"/>
+        <line class="gate" x1="720" y1="24" x2="720" y2="262"/>
+        <line class="gate" x1="985" y1="24" x2="985" y2="262"/>
+        <text class="rl" x="10" y="47">Base e medição · V4</text>
+        <rect class="bar" x="198" y="28" width="249" height="28" rx="6"/><text class="bt" x="207" y="46">1 WhatsApp + pré-form · 2 RD · 3 UTM</text>
+        <rect class="bar" x="463" y="28" width="249" height="28" rx="6"/><text class="bt" x="472" y="46">4 MQL no Google Ads · 5 eventos e públicos</text>
+        <text class="rl" x="10" y="83">Search + PMax · V4</text>
+        <rect class="bar" x="198" y="64" width="249" height="28" rx="6"/><text class="bt" x="207" y="82">8 Search · 6 LP Promoter</text>
+        <rect class="bar" x="463" y="64" width="249" height="28" rx="6"/><text class="bt" x="472" y="82">7 LP Lite · 9 PMax</text>
+        <text class="rl" x="10" y="119">Meta · V4</text>
+        <rect class="bar" x="198" y="100" width="249" height="28" rx="6"/><text class="bt" x="207" y="118">11 higiene · 10 vídeos novos (produção)</text>
+        <rect class="bar" x="463" y="100" width="249" height="28" rx="6"/><text class="bt" x="472" y="118">11 vídeos no topo · 12 conteúdos ao público</text>
+        <text class="rl" x="10" y="155">Blog e Demand Gen · V4</text>
+        <rect class="bar" x="198" y="136" width="249" height="28" rx="6"/><text class="bt" x="207" y="154">14 primeiro post · 15 Demand Gen · 16</text>
+        <rect class="bar" x="463" y="136" width="249" height="28" rx="6"/><text class="bt" x="472" y="154">14 posts estratégicos · 15 · 16 teste do blog</text>
+        <rect class="bart" x="728" y="136" width="249" height="28" rx="6"/><text class="bt" x="737" y="154">validar o Demand Gen</text>
+        <text class="rl" x="10" y="191">Comercial · TradePRO</text>
+        <rect class="bar" x="198" y="172" width="249" height="28" rx="6"/><text class="bt" x="207" y="190">17 WhatsApp no CRM com próxima ação</text>
+        <rect class="bar" x="463" y="172" width="249" height="28" rx="6"/><text class="bt" x="472" y="190">18 MQL e SQL no RD CRM</text>
+        <text class="rl" x="10" y="227">Fase 2 · V4 + TradePRO</text>
+        <rect class="bart" x="463" y="208" width="249" height="28" rx="6"/><text class="bt" x="472" y="226">19 ebook em produção</text>
+        <rect class="bart" x="993" y="208" width="249" height="28" rx="6"/><text class="bt" x="1002" y="226">20 campanha de leads · 21 régua de CRM</text>
+        <text class="lb" x="455" y="282" text-anchor="middle">Portão 1: rastreio validado</text>
+        <text class="lb" x="720" y="282" text-anchor="middle">Portão 2: público qualificado formado</text>
+        <text class="lb" x="985" y="282" text-anchor="middle">Portão 3: Demand Gen validado libera a fase 2</text>
+        </svg>
+    </div>
+    <div class="src">V4 executa. A TradePRO valida conteúdo e páginas, fornece as telas, autoriza os depoimentos e cuida do comercial (17 e 18). Barras tracejadas são decisões. Valores, verba, janelas e metas ficam com o gestor de tráfego.</div>
+  </section>
+</div>
+</body>
+</html>
